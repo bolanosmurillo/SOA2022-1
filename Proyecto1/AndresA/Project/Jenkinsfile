@@ -1,0 +1,20 @@
+pipeline {
+    agent { docker { image 'python:3.10.1-alpine' } }
+    stages {
+		stage('check') {
+            steps {
+                sh 'pylint cosa.py --disable=all --enable=E,W,C0116 --reports=no module --output-format=parseable > pylint.log'
+				if (echo | python3 logParser.py >= 8){
+					echo 'ok'
+				} else {
+					echo 'fail'
+				}
+            }
+        }
+        stage('build') {
+            steps {
+                sh 'python --version'
+            }
+        }
+    }
+}
