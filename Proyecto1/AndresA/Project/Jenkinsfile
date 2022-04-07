@@ -22,11 +22,10 @@ pipeline {
 					if (score == 8){
 						echo 'ok'
 					} else {
-						echo 'fail'
+						error 'score of: ${score}, less than 8'
 					}
 				}
             }
         }
     }
-}//https://stackoverflow.com/questions/36547680/how-do-i-get-the-output-of-a-shell-command-executed-using-into-a-variable-from-j
-//https://www.jenkins.io/doc/book/pipeline/syntax/#declarative-steps
+}
