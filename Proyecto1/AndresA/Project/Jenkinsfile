@@ -22,7 +22,7 @@ pipeline {
 				script {
 					score = doLint()
 					//sh (script:"rm Proyecto1/AndresA/Project/pylint.log")
-					if (score >= 7){
+					if (score.compareTo(7) == 1){
 						echo 'ok'
 					} else {
 						error 'score of: ${score}, less than 8'
