@@ -23,14 +23,23 @@ pipeline {
 				script {
 					score = doLint()
 					sh (script:"rm Proyecto1/AndresA/Project/pylint.log")
-					if (score >= 7){
+					if (score >= 9){
 						echo 'ok'
 					} else {
-						error 'score of: ${score}, less than 8'
+						error 'score of: ${score}, less than 9'
 					}
-					
 				}
             }
         }
+		stage('tests') {
+            steps {
+				echo 'tests ok'
+			}
+		}
+		stage('initTerraform') {
+            steps {
+				echo 'terra ok'
+			}
+		}
     }
 }
