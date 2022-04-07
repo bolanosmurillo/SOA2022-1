@@ -6,7 +6,7 @@ def doLint(){
 			returnStdout: true
 			).trim()
 		echo "score: ${score}"
-		int castedScore = score as int
+		float castedScore = Float.parseFloat(score)
 		return castedScore
 	} catch (Exception ex) {
 		echo "error in lint: ${ex}"
