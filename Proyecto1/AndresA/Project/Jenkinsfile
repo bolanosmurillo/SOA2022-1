@@ -9,6 +9,7 @@ def doLint(){
 		echo | python3 logParser.py'''
 	System.out = restore
 	echo score
+	echo 'done'
 	return score
 }
 
