@@ -3,19 +3,20 @@ pipeline {
     stages {
 		stage('check') {
             steps {
-                sh 'pylint cosa.py --disable=all --enable=E,W,C0116 --reports=no module --output-format=parseable > pylint.log'
-				script {
-					LINT_RESULT = sh(
-						script:'echo | python3 logParser.py',
-						returnStdout: true
-					).trim()
-					echo "lintRes: ${LINT_RESULT}"
-					if (LINT_RESULT >= 8){
-						echo 'ok'
-					} else {
-						echo 'fail'
-					}
-				}
+				echo | dir
+                //sh 'pylint cosa.py --disable=all --enable=E,W,C0116 --reports=no module --output-format=parseable > pylint.log'
+				//script {
+				//	LINT_RESULT = sh(
+				//		script:'echo | python3 logParser.py',
+				//		returnStdout: true
+				//	).trim()
+				//	echo "lintRes: ${LINT_RESULT}"
+				//	if (LINT_RESULT >= 8){
+				//		echo 'ok'
+				//	} else {
+				//		echo 'fail'
+				//	}
+				//}
             }
         }
         stage('build') {
@@ -24,4 +25,5 @@ pipeline {
             }
         }
     }
-}
+}//https://stackoverflow.com/questions/36547680/how-do-i-get-the-output-of-a-shell-command-executed-using-into-a-variable-from-j
+//https://www.jenkins.io/doc/book/pipeline/syntax/#declarative-steps
