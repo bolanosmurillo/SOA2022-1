@@ -9,7 +9,7 @@ def doLint(){
 		int castedScore = score as int
 		return castedScore
 	} catch (Exception ex) {
-		echo "erro in lint"
+		echo "error in lint: ${ex}"
 		return 0
 	}
 	
