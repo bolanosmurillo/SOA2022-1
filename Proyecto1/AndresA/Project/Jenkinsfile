@@ -26,7 +26,7 @@ pipeline {
 					if (score >= 7){
 						echo 'ok'
 					} else {
-						error 'score of: ${score}, less than 8'
+						error 'score of: ${score}, less than 7'
 					}
 					
 				}
