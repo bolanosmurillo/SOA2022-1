@@ -1,12 +1,16 @@
 def doLint(){
-	SCORE = sh ( script:'''cd Proyecto1/AndresA/Project
+	try {
+	def score = sh ( script:'cd Proyecto1/AndresA/Project
 		pylint cosa.py --disable=all --enable=E,W,C0116 --reports=no module --output-format=parseable > pylint.log
-		echo | python3 logParser.py''',
+		echo | python3 logParser.py',
 		returnStdout: true
 		).trim()
-	echo "score: ${SCORE}"
-	echo 'done'
-	return SCORE
+		echo "score: ${score}"
+		return score
+	} catch (Exception ex) {
+		return 0
+	}
+	
 }
 
 pipeline {
