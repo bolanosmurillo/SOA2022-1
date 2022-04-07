@@ -1,5 +1,5 @@
 a = 0
-def cosa:
-    pass
+def cosa(x):
+    print(x)
 
-print(b)
+print(a)
