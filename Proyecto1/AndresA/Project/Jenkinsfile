@@ -6,7 +6,8 @@ def doLint(){
 			returnStdout: true
 			).trim()
 		echo "score: ${score}"
-		return score
+		int castedScore = score as int
+		return castedScore
 	} catch (Exception ex) {
 		echo "erro in lint"
 		return 0
@@ -22,7 +23,7 @@ pipeline {
 				script {
 					score = doLint()
 					//sh (script:"rm Proyecto1/AndresA/Project/pylint.log")
-					if (score.compareTo(7)){
+					if (score >= 7){
 						echo 'ok'
 					} else {
 						error 'score of: ${score}, less than 8'
