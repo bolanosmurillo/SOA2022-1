@@ -1,7 +1,14 @@
 def doLint(){
 	cd Proyecto1/AndresA/Project
-	pylint cosa.py --disable=all --enable=E,W,C0116 --reports=no module --output-format=parseable > pylint.log
-	def score = echo | python3 logParser.py
+	def buf = new ByteArrayOutputStream()
+	def ps = new PrintStream(buf)
+	def score = System.out
+	def restore = System.out
+	System.out = ps
+	sh ''''pylint cosa.py --disable=all --enable=E,W,C0116 --reports=no module --output-format=parseable > pylint.log
+		echo | python3 logParser.py'''
+	System.out = restore
+	echo score
 	return score
 }
 
@@ -12,17 +19,12 @@ pipeline {
             steps {
 				script {
 					score = doLint()
-					if (score >= 7){
+					if (score == 8){
 						echo 'ok'
 					} else {
 						echo 'fail'
 					}
 				}
-            }
-        }
-        stage('build') {
-            steps {
-                sh 'python --version'
             }
         }
     }
