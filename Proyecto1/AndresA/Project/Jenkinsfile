@@ -6,8 +6,9 @@ pipeline {
 				script {
 					sh '''cd Proyecto1/AndresA/Project
 					      pylint cosa.py --disable=all --enable=E,W,C0116 --reports=no module --output-format=parseable > pylint.log
-						  LINT_RESULT = sh(
-							script:'echo | python3 logParser.py',
+					'''
+					LINT_RESULT = sh(
+							script:'cd Proyecto1/AndresA/Project && echo | python3 logParser.py',
 						    returnStdout: true
 						  ).trim()
 						  echo "lintRes: ${LINT_RESULT}"
@@ -16,7 +17,6 @@ pipeline {
 						  } else {
 							echo 'fail'
 						  }
-					'''
 				}
             }
         }
