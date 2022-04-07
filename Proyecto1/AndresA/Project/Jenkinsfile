@@ -7,6 +7,7 @@ def doLint(){
 		echo "score: ${score}"
 		return score
 	} catch (Exception ex) {
+		echo "erro in lint"
 		return 0
 	}
 	
