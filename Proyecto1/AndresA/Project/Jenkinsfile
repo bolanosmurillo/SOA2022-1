@@ -4,7 +4,7 @@ pipeline {
 		stage('check') {
             steps {
 				script{
-					echo | dir
+					sh dir
 				}
                 //sh 'pylint cosa.py --disable=all --enable=E,W,C0116 --reports=no module --output-format=parseable > pylint.log'
 				//script {
