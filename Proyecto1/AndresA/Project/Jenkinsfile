@@ -32,5 +32,10 @@ pipeline {
 				}
             }
         }
+		stage ('tests'){
+			step{
+				echo 'CHANGE_ID: ' + env.CHANGE_ID
+			}
+		}
     }
 }
