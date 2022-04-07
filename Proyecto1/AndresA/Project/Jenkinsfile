@@ -22,11 +22,12 @@ pipeline {
             steps {
 				script {
 					score = doLint()
-					sh (script:"rm Proyecto1/AndresA/Project/pylint.log")
 					if (score >= 7){
 						echo 'ok'
+						sh (script:"rm Proyecto1/AndresA/Project/pylint.log")
+						pullRequest.comment("Lint ok, got score of: ${score})
 					} else {
-						error 'score of: ${score}, less than 7'
+						pullRequest.comment("Lint failed, got score of: ${score}. Check log for details")
 					}
 					
 				}
