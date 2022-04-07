@@ -1,6 +1,6 @@
 def doLint(){
 	try {
-		sh ( script:"cd Proyecto1/AndresA/Project && pylint cosa.py --disable=all --enable=E,W,C0116 --reports=no module --output-format=parseable &> pylint.log")
+		sh ( script:"cd Proyecto1/AndresA/Project && pylint cosa.py --disable=all --enable=E,W,C0116 --reports=no module --output-format=parseable > pylint.log", returnStatus:true)
 		echo "ok"
 		def score = sh ( script: "cd Proyecto1/AndresA/Project && echo | python3 logParser.py",
 			returnStdout: true
