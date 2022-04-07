@@ -22,7 +22,7 @@ pipeline {
             steps {
 				script {
 					score = doLint()
-					//sh (script:"rm Proyecto1/AndresA/Project/pylint.log")
+					sh (script:"rm Proyecto1/AndresA/Project/pylint.log")
 					if (score >= 7){
 						echo 'ok'
 					} else {
