@@ -6,7 +6,7 @@ pipeline {
 				script {
 					sh '''cd Proyecto1/AndresA/Project
 						  dir
-					      pylint cosa.py --disable=all --enable=E,W,C0116 --reports=no module --output-format=parseable > pylint.log
+					      pylint cosa.py --disable=all --enable=E,W,C0116 --reports=no module --output-format=parseable
 						  echo 'ok'
 						  cat pylint.log
 						LINT_RESULT = sh(
