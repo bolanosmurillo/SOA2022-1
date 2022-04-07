@@ -1,11 +1,11 @@
 def doLint(){
-	cd Proyecto1/AndresA/Project
 	def buf = new ByteArrayOutputStream()
 	def ps = new PrintStream(buf)
 	def score = System.out
 	def restore = System.out
 	System.out = ps
-	sh ''''pylint cosa.py --disable=all --enable=E,W,C0116 --reports=no module --output-format=parseable > pylint.log
+	sh ''''cd Proyecto1/AndresA/Project
+		pylint cosa.py --disable=all --enable=E,W,C0116 --reports=no module --output-format=parseable > pylint.log
 		echo | python3 logParser.py'''
 	System.out = restore
 	echo score
