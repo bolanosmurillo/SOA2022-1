@@ -4,7 +4,7 @@ def doLint(){
 		echo | python3 logParser.py''',
 		returnStdout: true
 		).trim()
-	echo {@SCORE}
+	echo "score: ${SCORE}"
 	echo 'done'
 	return SCORE
 }
