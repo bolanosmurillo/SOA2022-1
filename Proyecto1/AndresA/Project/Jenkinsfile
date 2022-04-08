@@ -25,7 +25,7 @@ pipeline {
 					if (score >= 7){
 						echo 'ok'
 						sh (script:"rm Proyecto1/AndresA/Project/pylint.log")
-						pullRequest.comment("Lint ok, got score of: ${score})
+						pullRequest.comment("Lint ok, got score of: ${score}")
 					} else {
 						pullRequest.comment("Lint failed, got score of: ${score}. Check log for details")
 					}
