@@ -47,6 +47,7 @@ pipeline {
 			steps{
 				script {
 					if (env.CHANGE_ID) {
+						sh "python3 -m pip install google-cloud-vision"
 						testResult = doTests()
 						if (testResult == "0"){
 						echo "Testing ok"
@@ -57,7 +58,6 @@ pipeline {
 							sh 'exit 1'
 						}
 					}
-					
 				}
 			}
 		}
