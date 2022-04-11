@@ -33,7 +33,7 @@ pipeline {
 							pullRequest.comment("Lint failed, got score of: ${score}. Check log for details")
 						}
 						echo "Lint failed, got score of: ${score}. Check log for details"
-						
+						sh 'exit 1'
 					}
 					
 				}
