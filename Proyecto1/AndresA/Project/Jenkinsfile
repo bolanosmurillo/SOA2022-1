@@ -43,11 +43,19 @@ pipeline {
 				}
             }
         }
+		stage ('setUp'){
+			steps{
+				script {
+					sh "python3 -m pip install google-cloud-vision"
+					def keyPath = "Proyecto1/AndresA/Project/key.json"
+					sh 'export GOOGLE_APPLICATION_CREDENTIALS=${keyPath}'
+				}
+			}
+		}
 		stage ('tests'){
 			steps{
 				script {
 					if (env.CHANGE_ID) {
-						sh "python3 -m pip install google-cloud-vision"
 						testResult = doTests()
 						if (testResult == "0"){
 						echo "Testing ok"
