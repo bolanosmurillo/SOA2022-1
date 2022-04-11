@@ -47,7 +47,7 @@ pipeline {
 			steps{
 				script {
 					sh "python3 -m pip install google-cloud-vision"
-					cat "Proyecto1/AndresA/Project/key.json"
+					sh 'cat \\"Proyecto1/AndresA/Project/key.json\\"'
 					sh 'export GOOGLE_APPLICATION_CREDENTIALS=\\"Proyecto1/AndresA/Project/key.json\\"'
 				}
 			}
