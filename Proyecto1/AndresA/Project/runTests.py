@@ -1,4 +1,4 @@
-from mainScript import main
+from cloud_function.mainScript import main
 
 import sys
 import traceback
