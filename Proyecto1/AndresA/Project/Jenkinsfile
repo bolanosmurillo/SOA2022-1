@@ -15,7 +15,7 @@ def doLint(){
 }
 
 def doTests(){
-	def testResult = sh ( script: "gcloud auth activate-service-account visionapi@my-project-1535378363990.iam.gserviceaccount.com --key-file=/home/aalopz/sharedFolder/key.json && cd Proyecto1/AndresA/Project && echo | python3 runTests.py",
+	def testResult = sh ( script: "cd Proyecto1/AndresA/Project && echo | python3 runTests.py",
 			returnStdout: true
 			).trim()
 	echo "Testing results: ${testResult}"
