@@ -31,6 +31,7 @@ def getImpl(mode):
             def doDetect(self):
                 testImgs = ('angerTest.jpg','happyTest.jpg')
                 client = vision.ImageAnnotatorClient()
+                client.from_service_account_json('key.json')
                 image = vision.Image()
                 resultsTotal = []
                 for testImg in testImgs:
@@ -51,7 +52,6 @@ def getImpl(mode):
 
 
 def main(mode = 'r',imgB64 = 0):
-    ##os.system('gcloud auth activate-service-account visionapi@my-project-1535378363990.iam.gserviceaccount.com --key-file=/home/aalopz/sharedFolder/key.json')
     run = 0
     run = getImpl(mode)
     run.setImg()
