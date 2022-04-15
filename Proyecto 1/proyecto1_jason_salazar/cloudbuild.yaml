@@ -10,6 +10,8 @@ steps:
       pip install -r requirements.txt
       pip install pylint      
       pylint --errors-only  main.py
+      pylint --errors-only  emotion_detection.py
+      pylint --errors-only  test_function.py
 
 # [START tf-init]
 - id: 'tf init'
