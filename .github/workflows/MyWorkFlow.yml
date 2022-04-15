@@ -42,9 +42,11 @@ jobs:
 
     
     steps:
-    - uses: actions/checkout@v3
-    - name: Python Linter
-      uses: sunnysid3up/python-linter@v0.1-beta.7
-      env:
-        GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
-        VALIDATE_MD: false
+     - uses: actions/checkout@v2  
+     - name: Python Linter
+       uses: sunnysid3up/python-linter@master
+       with:
+         source: "Proyecto 1- Adrián González"
+         mypy-options: "--ignore-missing-imports --show-error-codes"
+         pylint-options: "--rcfile=setup.cfg"
+         isort-options: "-w 100"
