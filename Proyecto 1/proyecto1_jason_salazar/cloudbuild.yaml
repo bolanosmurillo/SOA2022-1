@@ -6,7 +6,7 @@ steps:
   args:
   - '-c'
   - | 
-      cd Proyecto\ 1/proyecto1_jason_salazar/cloud_function
+      cd Proyecto\ 1/proyecto1_jason_salazar/modules/cloud_function
       pip install -r requirements.txt
       pip install pylint      
       pylint --errors-only  main.py
