@@ -43,10 +43,9 @@ jobs:
     
     steps:
      - uses: actions/checkout@v2  
-     - name: Python Linter
-       uses: sunnysid3up/python-linter@master
-       with:
-         source: "Proyecto 1- Adrián González"
-         mypy-options: "--ignore-missing-imports --show-error-codes"
-         pylint-options: "--rcfile=setup.cfg"
-         isort-options: "-w 100"
+     - name: Super-Linter
+       uses: github/super-linter@v4.9.2
+       env:
+          VALIDATE_ALL_CODEBASE: false
+          DEFAULT_BRANCH: main
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
