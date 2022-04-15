@@ -1,5 +1,16 @@
 steps:
 
+- id: 'lint'
+  name: 'python:3.8-slim'
+  entrypoint: '/bin/sh'  
+  args:
+  - '-c'
+  - | 
+      cd Proyecto\ 1/proyecto1_jason_salazar/cloud_function
+      pip install -r requirements.txt
+      pip install pylint      
+      pylint --errors-only  main.py
+
 # [START tf-init]
 - id: 'tf init'
   name: 'hashicorp/terraform:1.0.0'
