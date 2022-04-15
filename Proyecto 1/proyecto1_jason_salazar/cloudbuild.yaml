@@ -1,4 +1,6 @@
 steps:
+
+# [START tf-init]
 - id: 'tf init'
   name: 'hashicorp/terraform:1.0.0'
   entrypoint: 'sh'
@@ -7,3 +9,15 @@ steps:
   - |
       cd Proyecto\ 1/proyecto1_jason_salazar/environments/$BRANCH_NAME/terraform
       terraform init -reconfigure
+# [END tf-init]
+
+# [START tf-plan]
+- id: 'tf plan'
+  name: 'hashicorp/terraform:1.0.0'
+  entrypoint: 'sh'
+  args: 
+  - '-c'
+  - | 
+      cd Proyecto\ 1/proyecto1_jason_salazar/environments/$BRANCH_NAME/terraform
+      terraform plan 
+# [END tf-plan]
