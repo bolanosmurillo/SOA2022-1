@@ -1,5 +1,6 @@
 steps:
 
+# [START lint]
 - id: 'lint'
   name: 'python:3.8-slim'
   entrypoint: '/bin/sh'  
@@ -12,6 +13,20 @@ steps:
       pylint main.py
       pylint emotion_detection.py
       pylint test_function.py
+# [END lint]
+
+# [START unittest]
+- id: 'unittest'
+  name: 'python:3.8-slim'
+  entrypoint: '/bin/sh'  
+  args:
+  - '-c'
+  - | 
+      cd Proyecto\ 1/proyecto1_jason_salazar/modules/cloud_function
+      pip install -r requirements.txt
+      pip install pytest
+      pytest 
+# [END unittest]
 
 # [START tf-init]
 - id: 'tf init'
@@ -34,3 +49,14 @@ steps:
       cd Proyecto\ 1/proyecto1_jason_salazar/environments/$BRANCH_NAME/terraform
       terraform plan 
 # [END tf-plan]
+
+# [START tf-apply]
+- id: 'tf apply'
+  name: 'hashicorp/terraform:1.0.0'
+  entrypoint: 'sh'
+  args: 
+  - '-c'
+  - | 
+      cd Proyecto\ 1/proyecto1_jason_salazar/environments/$BRANCH_NAME/terraform      
+      terraform apply -auto-approve
+# [END tf-apply] 
