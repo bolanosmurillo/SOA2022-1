@@ -11,8 +11,8 @@ def get_most_likely(emo, likelihood, most_likely_emotion):
         return (emo,likelihood)
     if  (likelihood == "POSSIBLE" and most_likely_emotion[1] == "-" ):
         return (emo,likelihood)
-    else:
-        return most_likely_emotion
+
+    return most_likely_emotion
 
 def get_emotion(face):
     """Permite seleccionar la emocion mas probable"""
@@ -28,7 +28,7 @@ def emo_detect(uri_base, pic):
     """Permite detectar la emocion de un rosto en una imagen"""
     client = vision.ImageAnnotatorClient()
     image = vision.Image()
-    image.source.image_uri = 'gs://%s/%s' % (uri_base, pic)
+    image.source.image_uri = f"gs://{uri_base}/pic"
 
     response = client.face_detection(image=image)# pylint: disable=no-member
     face = response.face_annotations[0]

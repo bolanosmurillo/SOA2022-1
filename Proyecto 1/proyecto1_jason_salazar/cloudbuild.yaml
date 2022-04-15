@@ -11,7 +11,7 @@ steps:
       pip install pylint      
       pylint main.py
       pylint emotion_detection.py
-      pylint --errors-only  test_function.py
+      pylint test_function.py
 
 # [START tf-init]
 - id: 'tf init'
