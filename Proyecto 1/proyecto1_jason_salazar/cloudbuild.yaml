@@ -9,7 +9,7 @@ steps:
       cd Proyecto\ 1/proyecto1_jason_salazar/modules/cloud_function
       pip install -r requirements.txt
       pip install pylint      
-      pylint --errors-only  main.py
+      pylint main.py
       pylint --errors-only  emotion_detection.py
       pylint --errors-only  test_function.py
 

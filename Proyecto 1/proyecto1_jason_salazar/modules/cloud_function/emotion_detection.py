@@ -30,4 +30,4 @@ def emo_detect(uri_base, pic):
     response = client.face_detection(image=image)# pylint: disable=no-member
     face = response.face_annotations[0]
 
-    return get_emotion(face)*
+    return get_emotion(face)
