@@ -28,7 +28,7 @@ def emo_detect(uri_base, pic):
     """Permite detectar la emocion de un rosto en una imagen"""
     client = vision.ImageAnnotatorClient()
     image = vision.Image()
-    image.source.image_uri = f"gs://{uri_base}/pic"
+    image.source.image_uri = f"gs://{uri_base}/{pic}"
 
     response = client.face_detection(image=image)# pylint: disable=no-member
     face = response.face_annotations[0]
