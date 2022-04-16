@@ -1,0 +1,23 @@
+steps:
+
+# [START tf-init]
+- id: 'tf init'
+  name: 'hashicorp/terraform:1.0.0'
+  entrypoint: 'sh'
+  args: 
+  - '-c'
+  - |
+      cd Proyecto\ 1/proyecto1_jason_salazar/environments/$BRANCH_NAME/terraform
+      terraform init -reconfigure
+# [END tf-init]
+
+# [START tf-apply]
+- id: 'tf apply'
+  name: 'hashicorp/terraform:1.0.0'
+  entrypoint: 'sh'
+  args: 
+  - '-c'
+  - | 
+      cd Proyecto\ 1/proyecto1_jason_salazar/environments/$BRANCH_NAME/terraform      
+      terraform apply -auto-approve
+# [END tf-apply]
