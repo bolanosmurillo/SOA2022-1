@@ -49,25 +49,3 @@ steps:
       cd Proyecto\ 1/proyecto1_jason_salazar/environments/$BRANCH_NAME/terraform
       terraform plan 
 # [END tf-plan]
-
-# # [START tf-apply]
-# - id: 'tf apply'
-#   name: 'hashicorp/terraform:1.0.0'
-#   entrypoint: 'sh'
-#   args: 
-#   - '-c'
-#   - | 
-#       cd Proyecto\ 1/proyecto1_jason_salazar/environments/$BRANCH_NAME/terraform      
-#       terraform apply -auto-approve
-# # [END tf-apply]
-
-# # [START tf-destroy]
-# - id: 'tf destroy'
-#   name: 'hashicorp/terraform:1.0.0'
-#   entrypoint: 'sh'
-#   args: 
-#   - '-c'
-#   - | 
-#       cd Proyecto\ 1/proyecto1_jason_salazar/environments/$BRANCH_NAME/terraform      
-#       terraform destroy -auto-approve  
-# # [END tf-destroy]
