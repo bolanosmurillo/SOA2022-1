@@ -4,7 +4,7 @@ import sys
 import traceback
 import os
 
-keyPath = '/home/aalopz/.config/gcloud/application_default_credentials.json'
+keyPath = '/home/aalopz/sharedFolder/key.json'
 os.environ['GOOGLE_APPLICATION_CREDENTIALS']=keyPath
 
 try:
