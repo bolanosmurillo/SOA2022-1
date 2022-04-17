@@ -11,7 +11,7 @@ import os
 
 uri_base = ('eu.artifacts.my-project-1535378363990.appspot.com','gs://eu.artifacts.my-project-1535378363990.appspot.com')
 pic = ('face_surprise.jpg')
-keyPath = '/home/aalopz/sharedFolder/key.json'
+keyPath = '/home/aalopz/.config/gcloud/application_default_credentials.json'
 
 def ping(host):
     param = '-n' if platform.system().lower()=='windows' else '-c'
