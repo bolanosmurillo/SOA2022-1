@@ -53,6 +53,7 @@ def getImpl(mode):
     else:
         class realImpl(interface):
             def doDetect(self,url=0):
+                os.environ["GOOGLE_APPLICATION_CREDENTIALS"]=keyPath
                 client = vision.ImageAnnotatorClient()
                 client.from_service_account_json(keyPath)
                 image = vision.Image()
