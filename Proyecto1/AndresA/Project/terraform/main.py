@@ -54,6 +54,7 @@ def getImpl(mode):
         class realImpl(interface):
             def doDetect(self,url=0):
                 client = vision.ImageAnnotatorClient()
+                client.from_service_account_json(keyPath)
                 image = vision.Image()
                 image.source.image_uri= url
                 response = client.face_detection(image=image)
