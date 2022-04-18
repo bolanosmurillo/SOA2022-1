@@ -20,21 +20,3 @@ locals {
 provider "google" {
   project = "${var.project}"
 }
-
-module "vpc" {
-  source  = "./Proyecto1/ProyectoLuisPrieto/modules/vpc"
-  project = "${var.project}"
-  env     = "${local.env}"
-}
-
-module "http_server" {
-  source  = "./Proyecto1/ProyectoLuisPrieto/modules/http_server"
-  project = "${var.project}"
-  subnet  = "${module.vpc.subnet}"
-}
-
-module "firewall" {
-  source  = "./Proyecto1/ProyectoLuisPrieto/modules/firewall"
-  project = "${var.project}"
-  subnet  = "${module.vpc.subnet}"
-}
