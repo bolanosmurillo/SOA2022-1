@@ -41,6 +41,7 @@ steps:
   args: 
   - '-c'
   - | 
+      ls
       if [ -d "terraform/$dev/" ]; then
         cd terraform/$dev
         terraform plan
