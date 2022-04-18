@@ -13,5 +13,10 @@
 # limitations under the License.
 
 
-variable "project" {}
-variable "region" {}
+variable "project" {
+    default = "proyecto1-luis"
+}
+
+variable "region" {
+    default = "europe-west1"
+} 
