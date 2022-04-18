@@ -31,7 +31,8 @@ steps:
   - '-c'
   - |
       echo "branch $BRANCH_NAME"
-      cd environments/dev
+      ls ../environments/dev
+      cd ../environments/dev
       echo "run init"
       terraform init
       echo "run plan"
