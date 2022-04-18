@@ -1,7 +1,7 @@
 def doLint(){
 	try {
-		sh ( script:"cd Proyecto1/AndresA/Project && pylint cosa.py --disable=all --enable=E,W,C0116 --reports=no module --output-format=parseable > pylint.log", returnStatus:true)
-		echo "ok"
+		sh ( script:"cd Proyecto1/AndresA/Project && pylint terraform/main.py --disable=all --enable=E,W,C0116 --reports=no module --output-format=parseable > pylint.log", returnStatus:true)
+		echo "lint log generated"
 		def score = sh ( script: "cd Proyecto1/AndresA/Project && echo | python3 logParser.py",
 			returnStdout: true
 			).trim()
@@ -12,7 +12,14 @@ def doLint(){
 		echo "error in lint: ${ex}"
 		return 0
 	}
-	
+}
+
+def doTests(){
+	def testResult = sh ( script: "cd Proyecto1/AndresA/Project && echo | python3 runTests.py",
+			returnStdout: true
+			).trim()
+	echo "Testing results: ${testResult}"
+	return testResult
 }
 
 pipeline {
@@ -21,24 +28,59 @@ pipeline {
 		stage('check') {
             steps {
 				script {
-					score = doLint()
-					sh (script:"rm Proyecto1/AndresA/Project/pylint.log")
-					if (score >= 9){
-						echo 'ok'
-					} else {
-						error 'score of: ${score}, less than 9'
+					if (env.CHANGE_ID) {
+						score = doLint()
+						if (score >= 7){
+							echo 'lint ok'
+							sh (script:"rm Proyecto1/AndresA/Project/pylint.log")
+							pullRequest.comment("Lint ok, got score of: ${score}")
+						} else {
+							pullRequest.comment("Lint failed, got score of: ${score}. Check log for details")
+							echo "Lint failed, got score of: ${score}, run pylint for details"
+							sh 'exit 1'
+						}
 					}
 				}
             }
         }
-		stage('tests') {
-            steps {
-				echo 'tests ok'
+		stage ('setUp'){
+			steps{
+				script {
+					sh "python3 -m pip install google-cloud-vision"
+				}
 			}
 		}
-		stage('initTerraform') {
-            steps {
-				echo 'terra ok'
+		stage ('tests'){
+			steps{
+				script {
+					if (env.CHANGE_ID) {
+						testResult = doTests()
+						if (testResult == "0"){
+						echo "Testing ok"
+							pullRequest.comment("Testing ok")
+						} else {
+							pullRequest.comment("Testing failed, error: ${testResult}")
+							echo "Testing failed, check pr for details"
+							sh 'exit 1'
+						}
+					}
+				}
+			}
+		}
+		stage ('plan'){
+			steps{
+				script{
+					//sh (script:"cd Proyecto1/AndresA/Project/terraform && terraform init -input=false && terraform destroy -input=false -auto-approve &&terraform plan -out=tfplan -input=false")
+					echo 'did plan'
+				}
+			}
+		}
+		stage ('build'){
+			steps{
+				script{
+					//sh (script:"cd Proyecto1/AndresA/Project/terraform && terraform apply -input=false -auto-approve tfplan")
+					echo 'did build'
+				}
 			}
 		}
     }
