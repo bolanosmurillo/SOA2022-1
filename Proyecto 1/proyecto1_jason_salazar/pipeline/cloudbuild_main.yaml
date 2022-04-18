@@ -7,6 +7,7 @@ steps:
   args:
   - '-c'
   - | 
+      ls
       cd ../modules/cloud_function
       pip install -r requirements.txt
       pip install pylint      
