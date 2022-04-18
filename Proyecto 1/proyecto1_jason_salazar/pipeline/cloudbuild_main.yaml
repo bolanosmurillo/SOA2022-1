@@ -7,7 +7,7 @@ steps:
   args:
   - '-c'
   - | 
-      cd Proyecto\ 1/proyecto1_jason_salazar/modules/cloud_function
+      cd ../modules/cloud_function
       pip install -r requirements.txt
       pip install pylint      
       pylint main.py
@@ -22,7 +22,7 @@ steps:
   args:
   - '-c'
   - | 
-      cd Proyecto\ 1/proyecto1_jason_salazar/modules/cloud_function
+      cd ../modules/cloud_function
       pip install -r requirements.txt
       pip install pytest
       pytest 
@@ -35,7 +35,7 @@ steps:
   args: 
   - '-c'
   - |
-      cd Proyecto\ 1/proyecto1_jason_salazar/environments/$BRANCH_NAME/terraform
+      cd ../environments/$BRANCH_NAME/terraform
       terraform init -reconfigure
 # [END tf-init]
 
@@ -46,6 +46,6 @@ steps:
   args: 
   - '-c'
   - | 
-      cd Proyecto\ 1/proyecto1_jason_salazar/environments/$BRANCH_NAME/terraform
+      cd ../environments/$BRANCH_NAME/terraform
       terraform plan 
 # [END tf-plan]
