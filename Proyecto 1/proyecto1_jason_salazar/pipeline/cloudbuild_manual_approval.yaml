@@ -7,7 +7,7 @@ steps:
   args: 
   - '-c'
   - |
-      cd ../environments/$BRANCH_NAME/terraform
+      cd Proyecto\ 1/proyecto1_jason_salazar/environments/$BRANCH_NAME/terraform
       terraform init -reconfigure
 # [END tf-init]
 
@@ -18,6 +18,6 @@ steps:
   args: 
   - '-c'
   - | 
-      cd ../environments/$BRANCH_NAME/terraform      
+      cd Proyecto\ 1/proyecto1_jason_salazar/environments/$BRANCH_NAME/terraform      
       terraform apply -auto-approve
 # [END tf-apply]
