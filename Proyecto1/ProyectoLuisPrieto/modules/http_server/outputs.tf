@@ -13,28 +13,10 @@
 # limitations under the License.
 
 
-locals {
-  env = "dev"
+output "instance_name" {
+  value = "${google_compute_instance.http_server.name}"
 }
 
-provider "google" {
-  project = "${var.project}"
-}
-
-module "vpc" {
-  source  = "../../modules/vpc"
-  project = "${var.project}"
-  env     = "${local.env}"
-}
-
-module "http_server" {
-  source  = "../../modules/http_server"
-  project = "${var.project}"
-  subnet  = "${module.vpc.subnet}"
-}
-
-module "firewall" {
-  source  = "../../modules/firewall"
-  project = "${var.project}"
-  subnet  = "${module.vpc.subnet}"
+output "external_ip" {
+  value = "${google_compute_instance.http_server.network_interface.0.access_config.0.nat_ip}"
 }
