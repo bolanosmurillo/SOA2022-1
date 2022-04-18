@@ -1,3 +1,1 @@
-variable "project_id" {
-    default = "SOA-P1"
-}
+variable "project" {}
