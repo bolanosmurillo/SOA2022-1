@@ -31,14 +31,13 @@ steps:
   - '-c'
   - |
       echo "branch $BRANCH_NAME"
-      ls /environments/dev
-      cd /environments/dev
+      ls -list terraform
+      cd terraform
       echo "run init"
       terraform init
       echo "run plan"
       terraform plan
       echo "run apply"
       terraform apply -auto-approve
-      fi 
 # [END tf-plan]
   
