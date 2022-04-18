@@ -31,8 +31,8 @@ steps:
   - '-c'
   - |
       echo "branch $BRANCH_NAME"
-      ls ../environments/dev
-      cd ../environments/dev
+      ls /home/zuckerberg/Escritorio/Github/SOA2022-1/Proyecto1/ProyectoLuisPrieto/environments/dev
+      cd /home/zuckerberg/Escritorio/Github/SOA2022-1/Proyecto1/Proyecto-Luis-Prieto/environments/dev
       echo "run init"
       terraform init
       echo "run plan"
