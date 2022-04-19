@@ -30,7 +30,7 @@ steps:
   - '-c'
   - |
       if [ -d "Proyecto1/terraform/" ]; then
-        cd Proyecto1/terraform/
+        cd Proyecto1/terraform
         terraform init
       else
         for dir in Proyecto1/terraform/
@@ -54,7 +54,7 @@ steps:
   - '-c'
   - | 
       if [ -d "Proyecto1/terraform/" ]; then
-        cd Proyecto1/terraform/
+        cd Proyecto1/terraform
         terraform plan
       else
         for dir in Proyecto1/terraform/
@@ -80,7 +80,7 @@ steps:
   - '-c'
   - | 
       if [ -d "Proyecto1/terraform/" ]; then
-        cd Proyecto1/terraform/      
+        cd Proyecto1/terraform      
         terraform apply -auto-approve
       else
         echo "***************************** SKIPPING APPLYING *******************************"
