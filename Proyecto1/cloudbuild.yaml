@@ -14,8 +14,8 @@
 
 
 steps:
-- id: 'branch name'
-  name: 'alpine'
+- id: '¨Proyecto 1 - SOA' 
+  name: 'Mariano'
   entrypoint: 'sh'  
   args: 
   - '-c'
