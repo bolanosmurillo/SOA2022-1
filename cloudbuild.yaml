@@ -10,7 +10,8 @@ steps:
       cd Proyecto\ 1/Viviana\ Villalobos/code/modules/cloud_function
       pip install -r requirements.txt
       pip install pylint    
-      pip install -r google.cloud  
+      pip install --upgrade google-api-python-client
+      pip install google.cloud  
       pylint main.py
       pylint test_func.py
 # [END lint]
@@ -25,7 +26,8 @@ steps:
       cd Proyecto\ 1/Viviana\ Villalobos/code/modules/cloud_function
       pip install -r requirements.txt
       pip install pytest
-      pip install -r google.cloud  
+      pip install --upgrade google-api-python-client
+      pip install google.cloud   
       pytest 
 # [END unittest]
 
