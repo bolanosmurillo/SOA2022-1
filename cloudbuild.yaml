@@ -21,13 +21,13 @@ steps:
   args: 
   - '-c'
   - |
-      if [ -d "terraform/enviroments/$BRANCH_NAME/" ]; then
+      if [ -d "terraform/ environments/$BRANCH_NAME/" ]; then
         ls
-        cd terraform/enviroments/$BRANCH_NAME
+        cd terraform/ environments/$BRANCH_NAME
         terraform init
       else
         ls
-        for dir in terraform/enviroments/*/
+        for dir in terraform/ environments/*/
         do 
           cd ${dir}   
           env=${dir%*/}
@@ -47,8 +47,8 @@ steps:
   args: 
   - '-c'
   - | 
-      if [ -d " terraform/enviroments/$BRANCH_NAME/" ]; then
-        cd  terraform/enviroments/$BRANCH_NAME
+      if [ -d " terraform/ environments/$BRANCH_NAME/" ]; then
+        cd  terraform/ environments/$BRANCH_NAME
         terraform plan
       else
         for dir in  terraform/environments/*/
@@ -73,8 +73,8 @@ steps:
   args: 
   - '-c'
   - | 
-      if [ -d " terraform/enviroments/$BRANCH_NAME/" ]; then
-        cd  terraform/enviroments/$BRANCH_NAME      
+      if [ -d " terraform/ environments/$BRANCH_NAME/" ]; then
+        cd  terraform/ environments/$BRANCH_NAME      
         terraform apply -auto-approve
       else
         echo "***************************** SKIPPING APPLYING *******************************"
