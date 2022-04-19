@@ -48,21 +48,21 @@ steps:
           echo "******* At environment: ${env} ********"
           echo "*************************************************"
           terraform plan || exit 1
-          cd ../../
+          cd ../../../../../../
         done
       fi 
 
 
       
 
-# [START tf-apply]
-- id: 'tf apply'
+
+- id: 'terraform apply'
   name: 'hashicorp/terraform:1.0.0'
   entrypoint: 'sh'
   args: 
   - '-c'
   - | 
-      if [ -d " Proyecto1/terraform/environments/$BRANCH_NAME/" ]; then
+      if [ -d "Proyecto1/terraform/environments/$BRANCH_NAME/" ]; then
         cd  Proyecto1/terraform/environments/$BRANCH_NAME      
         terraform apply -auto-approve
       else
@@ -70,4 +70,3 @@ steps:
         echo "Branch '$BRANCH_NAME' does not represent an oficial environment."
         echo "*******************************************************************************"
       fi
-# [END tf-apply]
