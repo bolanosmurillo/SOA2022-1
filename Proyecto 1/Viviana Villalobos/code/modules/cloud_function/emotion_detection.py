@@ -1,3 +1,6 @@
+"""
+Emotion detection. Will call caloud API to get the best emotion
+"""
 from google.cloud import vision_v1
 import os
 
