@@ -1,2 +1,2 @@
 def main(event, content):
-    print("Contexto", content)
+    print("Contexto: ", content)

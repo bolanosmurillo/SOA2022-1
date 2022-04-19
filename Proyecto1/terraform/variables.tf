@@ -3,5 +3,5 @@ variable "project_id" {
 }
 
 variable "region" {
-    default = "global"
+    default = "southamerica-east1"
 } 
