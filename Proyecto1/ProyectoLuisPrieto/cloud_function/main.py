@@ -1,6 +1,8 @@
 #define main(event, context):
 #	print("Evento-contexto", context)
 
+#La función de detección se basó de la documentación oficial de Google Cloud Platform: https://cloud.google.com/vision/docs/detecting-faces?hl=es
+#La configuración del Cloud Function se basó igualmente en la documentación oficial de Google Cloud Platform: https://cloud.google.com/functions/docs/tutorials/ocr
 
 import io
 from google.cloud import vision

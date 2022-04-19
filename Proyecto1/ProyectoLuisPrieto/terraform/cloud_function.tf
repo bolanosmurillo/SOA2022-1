@@ -17,7 +17,7 @@ resource "google_storage_bucket_object" "zip" {
 
 resource "google_cloudfunctions_function" "function" {
     name                  = "my_function"
-    runtime               = "python37"  # of course changeable
+    runtime               = "python38"  # of course changeable
 
     # Get the source code of the cloud function as a Zip compression
     source_archive_bucket = google_storage_bucket.function_bucket.name
