@@ -21,7 +21,7 @@ steps:
         cd terraform/$dev
         terraform init
       else
-        for dir in Proyecto1/terraform/*/
+        for dir in Proyecto1/terraform/dev/
         do 
           cd ${dir}   
           env=${dir%*/}
@@ -47,7 +47,7 @@ steps:
         cd terraform/$dev
         terraform plan
       else
-        for dir in Proyecto1/terraform/*/
+        for dir in Proyecto1/terraform/dev/
         do 
           cd ${dir}   
           env=${dir%*/}
