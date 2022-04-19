@@ -13,4 +13,10 @@
 # limitations under the License.
 
 
-variable "project" {}
+variable "project" {
+    default="soa2022-1"
+}
+
+variable "region" {
+    default = "global (non-regional)"
+}
