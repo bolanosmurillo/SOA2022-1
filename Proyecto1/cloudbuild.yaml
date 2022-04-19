@@ -55,9 +55,9 @@ steps:
       - "-c"
       - |
         pwd
-        ls
-        if [ -d "terraform/environments/$BRANCH_NAME/" ]; then
-          cd  terraform/environments/$BRANCH_NAME      
+        ls ./Proyecto1
+        if [ -d "Proyecto1/terraform/environments/$BRANCH_NAME/" ]; then
+          cd  Proyecto1/terraform/environments/$BRANCH_NAME      
           terraform apply -auto-approve
         else
           echo "***************************** SKIPPING APPLYING *******************************"
