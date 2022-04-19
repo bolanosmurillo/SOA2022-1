@@ -5,5 +5,5 @@ variable "buckedName"{
     default = "buidsoa"
 }
 variable "region" {
-    default = "europe-west1"
+    default = "us-central1"
 } 
