@@ -21,6 +21,7 @@ steps:
   - '-c'
   - |
       ls
+      cd Proyecto1/terraform/environments/main 
       terraform plan
 
 
@@ -34,4 +35,5 @@ steps:
   - '-c'
   - | 
       ls
+      cd Proyecto1/terraform/environments/main 
       terraform apply -auto-approve
