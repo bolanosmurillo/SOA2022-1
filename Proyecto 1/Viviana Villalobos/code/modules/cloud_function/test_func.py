@@ -4,7 +4,9 @@ Unit test
 import emotion_detection
 
 def test_get_emotion():
-
+    """
+    Unit test
+    """
     result = emotion_detection.get_emotion('persona1.jpg')
 
 
