@@ -2,7 +2,7 @@
 import emotion_detection
 
 def main(event , context):
-    """Permite analizar las emociones de una imagen"""
+    """Permite detectar las emociones de una imagen"""
 
     uri_base = event['bucket'] #Bucket donde esta la imagen
     pic = event['name']        #Nombre de la imagen a analizar
