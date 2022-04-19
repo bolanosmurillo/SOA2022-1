@@ -12,4 +12,4 @@ def test_emo_detect():
 
 
     assert result[0] == "Joy"
-    assert result[1] == "LIKELY"
+    assert result[1] == "VERY_LIKELY"
