@@ -6,25 +6,11 @@ steps:
   args: 
   - '-c'
   - |
-      if [ -d "Proyecto1/terraform/environments/$BRANCH_NAME/" ]; then
-        ls
-        cd Proyecto1/terraform/environments/$BRANCH_NAME
-        terraform init
-      else
-        ls
-        for dir in Proyecto1/terraform/environments/*/
-        do 
-          cd ${dir}   
-          env=${dir%*/}
-          env=${env#*/}
-          echo ""
-          echo "*************** TERRAFORM INIT ******************"
-          echo "******* At environment: ${env} ********"
-          echo "*************************************************"
-          terraform init || exit 1
-          cd ../../../../../../
-        done
-      fi 
+      ls
+      cd Proyecto1/terraform/environments/main 
+      terraform init
+
+
 
 
 
@@ -34,23 +20,8 @@ steps:
   args:
   - '-c'
   - |
-      if [ -d "Proyecto1/terraform/environments/$BRANCH_NAME/" ]; then
-        cd Proyecto1/terraform/environments/$BRANCH_NAME
-        terraform plan
-      else
-        for dir in Proyecto1/terraform/environments/*/
-        do
-          cd ${dir}
-          env=${dir%*/}
-          env=${env#*/}
-          echo ""
-          echo "*************** TERRAFOM PLAN ******************"
-          echo "******* At environment: ${env} ********"
-          echo "*************************************************"
-          terraform plan || exit 1
-          cd ../../../../../../ 
-        done
-      fi 
+      terraform plan
+
 
 
       
@@ -61,7 +32,4 @@ steps:
   args: 
   - '-c'
   - | 
-      ls
-      cd  Proyecto1/terraform/environments/main     
-      ls
       terraform apply -auto-approve
