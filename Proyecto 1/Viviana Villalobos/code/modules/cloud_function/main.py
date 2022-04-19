@@ -1,7 +1,7 @@
 """Este modulo detecta la emocion en la imagen"""
 import emotion_detection
 
-def main(event , context):
+def main(event):
     """Permite detectar las emociones de una imagen"""
 
     uri_base = event['bucket'] #Bucket donde esta la imagen
