@@ -19,6 +19,7 @@ steps:
   entrypoint: 'sh'  
   args: 
   - '-c'
+  - | 
       echo "***********************"
       echo "$BRANCH_NAME"
       echo "***********************"
