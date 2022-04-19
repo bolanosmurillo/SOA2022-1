@@ -11,8 +11,11 @@ steps:
       echo "*********** Installing pip ************"
       apk add py3-pip
       pip3 install -U setuptools
-      echo "*********** Installing pytest ************"
+      echo "*********** Installing libraries ************"
       pip3 install -U pytest
+      pip install tabulate
+      pip3 install google-cloud-storage
+      pip3 install google-cloud-vision
       echo "*********** Checking code ************"
       cd Proyecto1/cloud_function
       python3 -m pytest test.py
@@ -54,3 +57,4 @@ steps:
       ls
       cd Proyecto1/terraform/environments/main 
       terraform apply -auto-approve
+
