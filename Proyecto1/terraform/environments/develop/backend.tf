@@ -1,6 +1,6 @@
 terraform {
   backend "gcs" {
-    bucket = var.buckedName
+    bucket = "buidsoa"
     prefix = "env/dev"
   }
 }
