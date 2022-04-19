@@ -14,7 +14,7 @@
 
 
 steps:
-- id: '¨Proyecto 1 - SOA' 
+- id: '¨Proyecto 1-SOA-Mariano' 
   name: 'alpine'
   entrypoint: 'sh'  
   args: 
