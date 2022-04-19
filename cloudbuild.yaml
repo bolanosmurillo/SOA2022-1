@@ -1,7 +1,7 @@
 steps:
 
 - id: 'terraform init'
-  name: 'hashicorp/terraform:1.7.0'
+  name: 'hashicorp/terraform:1.0.0'
   entrypoint: 'sh'
   args: 
   - '-c'
@@ -27,7 +27,7 @@ steps:
       fi 
 
 - id: 'tf plan'
-  name: 'hashicorp/terraform:1.7.0'
+  name: 'hashicorp/terraform:1.0.0'
   entrypoint: 'sh'
   args: 
   - '-c'
@@ -52,13 +52,13 @@ steps:
 
 # [START tf-apply]
 - id: 'tf apply'
-  name: 'hashicorp/terraform:1.7.0'
+  name: 'hashicorp/terraform:1.0.0'
   entrypoint: 'sh'
   args: 
   - '-c'
   - | 
       if [ -d " Proyecto1/terraform/environments/$BRANCH_NAME/" ]; then
-        cd  Proyecto1/terraform/environments/$BRANCH_NAME      
+        cd  terraform/environments/$BRANCH_NAME      
         terraform apply -auto-approve
       else
         echo "***************************** SKIPPING APPLYING *******************************"
