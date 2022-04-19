@@ -1,9 +1,8 @@
-"""Este modulo detecta la emocion en la imagen"""
 import emotion_detection
 
-def test_emo_detect():
+def test_get_emotion():
 
-    result = emotion_detection.emo_detect("persona1.jpg")
+    result = emotion_detection.get_emotion("persona1.jpg")
 
 
     assert result[0] == "Joy"
