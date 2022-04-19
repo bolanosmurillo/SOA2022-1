@@ -16,7 +16,7 @@
 terraform {
   backend "gcs" {
     bucket = "moon-347702-tfstate"
-    prefix = "develop"
+    prefix = "env/dev"
   }
 }
 

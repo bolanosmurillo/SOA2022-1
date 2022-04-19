@@ -16,6 +16,6 @@
 terraform {
   backend "gcs" {
     bucket = "moon-347702-tfstate"
-    prefix = "main"
+    prefix = "env/prod"
   }
 }
