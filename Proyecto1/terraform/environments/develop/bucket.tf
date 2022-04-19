@@ -1,10 +1,10 @@
 resource "google_storage_bucket" "function_bucket" {
   name = "${var.project_id}-function"
-  location = "us-central1"
+  location = var.region
 }
 
 resource "google_storage_bucket" "input_bucket" {
   name = "${var.project_id}-input"
-  location = "us-central1"
+  location = var.region
   force_destroy=true
 }
