@@ -18,5 +18,5 @@ variable "project" {
 }
 
 variable "region" {
-    default = "global"
+    default = "global (non-regional)"
 }
