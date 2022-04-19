@@ -1,7 +1,7 @@
 variable "project_id" {
-    default = "lab2-wert-mariano"
+    default = "proyecto-1-soa"
 }
 
 variable "region" {
-    default = "europe-west1"
+    default = "global"
 } 
