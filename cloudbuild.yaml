@@ -28,7 +28,6 @@ steps:
 
 
 
-
 - id: 'terraform plan'
   name: 'hashicorp/terraform:1.0.0'
   entrypoint: 'sh'
@@ -37,7 +36,7 @@ steps:
   - |
       if [ -d "Proyecto1/terraform/environments/$BRANCH_NAME/" ]; then
         cd Proyecto1/terraform/environments/$BRANCH_NAME
-        terraform plan -lock=false
+        terraform plan
       else
         for dir in Proyecto1/terraform/environments/*/
         do
@@ -48,7 +47,7 @@ steps:
           echo "*************** TERRAFOM PLAN ******************"
           echo "******* At environment: ${env} ********"
           echo "*************************************************"
-          terraform plan -lock=false || exit 1
+          terraform plan || exit 1
           cd ../../
         done
       fi 
@@ -63,7 +62,7 @@ steps:
   args: 
   - '-c'
   - | 
-      if [ -d "Proyecto1/terraform/environments/$BRANCH_NAME/" ]; then
+      if [ -d " Proyecto1/terraform/environments/$BRANCH_NAME/" ]; then
         cd  Proyecto1/terraform/environments/$BRANCH_NAME      
         terraform apply -auto-approve
       else
