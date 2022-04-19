@@ -1,18 +1,5 @@
 
 steps:
-# Install dependencies
-  - name: python
-    entrypoint: pip3
-    args: ["install", "-r", "./requirements.txt", "--user"]
-  # Build step to run pylint on my prod.py file. 
-  # It will stop the process if the score is less than 8.0.
-  - name: python
-    entrypoint: python
-    args: ["-m", "pylint", "main.py", "--fail-under=8.0"]
-  # Yay!
-  - name: 'bash'
-    args: ['echo', 'Success!']
-
 
 - id: 'branch name'
   name: 'alpine'
@@ -96,3 +83,16 @@ steps:
         echo "*******************************************************************************"
       fi
 # [END tf-apply]      
+
+# Install dependencies
+  - name: python
+    entrypoint: pip3
+    args: ["install", "-r", "./requirements.txt", "--user"]
+  # Build step to run pylint on my prod.py file. 
+  # It will stop the process if the score is less than 8.0.
+  - name: python
+    entrypoint: python
+    args: ["-m", "pylint", "main.py", "--fail-under=8.0"]
+  # Yay!
+  - name: 'bash'
+    args: ['echo', 'Success!']
