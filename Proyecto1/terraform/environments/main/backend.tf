@@ -1,7 +1,7 @@
 
 terraform {
   backend "gcs" {
-    bucket = "moon-347702-tfstate"
+    bucket = var.buckedName
     prefix = "env/prod"
   }
 }
