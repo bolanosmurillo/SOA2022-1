@@ -2,13 +2,8 @@
 import emotion_detection
 
 def test_emo_detect():
-    """Prueba unitaria de la funcion emo_detect"""
 
-    #public data
-    test_uri_base = 'cloud-vision-codelab'
-    test_pic = 'face_surprise.jpg'
-
-    result = emotion_detection.emo_detect(test_uri_base, test_pic)
+    result = emotion_detection.emo_detect("persona1.jpg")
 
 
     assert result[0] == "Joy"

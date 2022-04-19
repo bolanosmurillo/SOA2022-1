@@ -1,38 +1,29 @@
-##from __future__ import print_function
-"""Modulo necesario para utiliza Google Vsion API"""
 from google.cloud import vision_v1
 import os
 
-def get_most_likely(emo, likelihood, most_likely_emotion):
-    """Dado dos emociones conserva la de mayor probabilidad"""
-    likelihood = likelihood.replace('Likelihood.', '')
-    if likelihood == "VERY_LIKELY":
-        return (emo,likelihood)
-    if (likelihood == "LIKELY" and most_likely_emotion[1] != "VERY_LIKELY" ):
-        return (emo,likelihood)
-    if  (likelihood == "POSSIBLE" and most_likely_emotion[1] == "-" ):
-        return (emo,likelihood)
+def get_best(emotion_str, likely, emotion_try):
+    likely = likely.replace('Likelihood.', '')
+    if likely == "VERY_LIKELY":
+        return (emotion_str,likely)
+    if (likely == "LIKELY" and emotion_try[1] != "VERY_LIKELY" ):
+        return (emotion_str,likely)
+    if  (likely == "POSSIBLE" and emotion_try[1] == "-" ):
+        return (emotion_str,likely)
 
-    return most_likely_emotion
+    return emotion_try
 
-def get_emotion(face):
-    """Permite seleccionar la emocion mas probable"""
-    most_likely_emotion = ("Ninguna","-")
-    most_likely_emotion =  get_most_likely("Anger", str(face.anger_likelihood), most_likely_emotion)
-    most_likely_emotion =  get_most_likely("Joy", str(face.joy_likelihood), most_likely_emotion)
-    most_likely_emotion =  get_most_likely("Surprice", str(face.surprise_likelihood),
-    most_likely_emotion)
-
-    return most_likely_emotion
-
-def emo_detect(uri_base, pic):
-    """Permite detectar la emocion de un rosto en una imagen"""
+def get_emotion(pic_name):
     client = vision_v1.ImageAnnotatorClient()
     image = vision_v1.Image()
-    image.source.image_uri = "https://storage.googleapis.com/soa_bucket_project/persona1.jpg"
+    image.source.image_uri = "https://storage.googleapis.com/soa_bucket_project/" + pic_name
 
-    response_face = client.face_detection(image=image)# pylint: disable=no-member
+    response_face = client.face_detection(image=image)
     face = response_face.face_annotations[0]
-    print(face)
 
-    return get_emotion(face)
+    emotion = ("None","-")
+    emotion =  get_best("Anger", str(face.anger_likelihood), emotion)
+    emotion =  get_best("Joy", str(face.joy_likelihood), emotion)
+    emotion =  get_best("Surprice", str(face.surprise_likelihood),emotion)
+    emotion =  get_best("Sorrow", str(face.sorrow_likelihood),emotion)
+
+    return emotion
