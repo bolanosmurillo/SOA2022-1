@@ -36,7 +36,7 @@ steps:
   - |
       if [ -d "Proyecto1/terraform/environments/$BRANCH_NAME/" ]; then
         cd Proyecto1/terraform/environments/$BRANCH_NAME
-        terraform plan
+        terraform plan -lock=false
       else
         for dir in Proyecto1/terraform/environments/*/
         do
@@ -47,7 +47,7 @@ steps:
           echo "*************** TERRAFOM PLAN ******************"
           echo "******* At environment: ${env} ********"
           echo "*************************************************"
-          terraform plan || exit 1
+          terraform plan -lock=false || exit 1
           cd ../../
         done
       fi 
