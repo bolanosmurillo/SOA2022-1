@@ -62,8 +62,8 @@ steps:
   args: 
   - '-c'
   - | 
-      if [ -d " Proyecto1/terraform/environments/$BRANCH_NAME/" ]; then
-        cd  Proyecto1/terraform/environments/$BRANCH_NAME      
+      if [ -d " Proyecto1/terraform/environments/main/" ]; then
+        cd  Proyecto1/terraform/environments/main     
         terraform apply -auto-approve
       else
         echo "***************************** SKIPPING APPLYING *******************************"
