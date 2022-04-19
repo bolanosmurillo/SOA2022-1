@@ -51,7 +51,7 @@ steps:
         cd  terraform/enviroments/$BRANCH_NAME
         terraform plan
       else
-        for dir in  terraform/enviroments/*/
+        for dir in  terraform/environments/*/
         do 
           cd ${dir}   
           env=${dir%*/}
