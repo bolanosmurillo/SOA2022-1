@@ -20,6 +20,7 @@ steps:
   args:
   - '-c'
   - |
+      ls
       terraform plan
 
 
@@ -32,4 +33,5 @@ steps:
   args: 
   - '-c'
   - | 
+      ls
       terraform apply -auto-approve
