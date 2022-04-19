@@ -48,19 +48,19 @@ steps:
           done
         fi
   # [START tf-apply]
-  - id: "tf apply"
-    name: "hashicorp/terraform:1.0.0"
-    entrypoint: "sh"
-    args:
-      - "-c"
-      - |
-        if [ -d "Proyecto1/terraform/environments/$BRANCH_NAME/" ]; then
-          cd  Proyecto1/terraform/environments/$BRANCH_NAME      
-          terraform apply -auto-approve
-        else
-          echo "***************************** SKIPPING APPLYING *******************************"
-          echo "Branch '$BRANCH_NAME' does not represent an oficial environment."
-          echo "*******************************************************************************"
-        fi
+- id: 'tf apply'
+  name: 'hashicorp/terraform:1.0.0'
+  entrypoint: 'sh'
+  args: 
+  - '-c'
+  - | 
+      if [ -d " Proyecto1/terraform/environments/$BRANCH_NAME/" ]; then
+        cd  terraform/environments/$BRANCH_NAME
+        terraform apply -auto-approve
+      else
+        echo "** SKIPPING APPLYING **"
+        echo "Branch '$BRANCH_NAME' does not represent an oficial environment."
+        echo "***"
+      fi
 
 # [END tf-apply]
