@@ -1,6 +1,8 @@
+
+
 terraform {
-  backend "local" {}
-} 
-
-
-
+  backend "gcs" {
+    bucket = "soavision"
+    prefix = "env/dev"
+  }
+}
