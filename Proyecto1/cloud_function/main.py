@@ -88,11 +88,9 @@ def prettyPrint(feelings):
     print(tabulate(table, headers=headers, tablefmt='fancy_grid'))
     
     
-def main():
+def main(event,context):
     faces=getFaces()
     feelings=feelingAnalysisFromFaces(faces)
     prettyPrint(feelings)
     
 
-
-main()
