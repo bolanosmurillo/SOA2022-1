@@ -1,6 +1,6 @@
 terraform {
   backend "gcs" {
-    bucket = "soabucket1"
+    bucket = "soabuilder"
     prefix = "env/prod"
   }
 }
