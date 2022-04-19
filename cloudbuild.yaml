@@ -1,5 +1,6 @@
 steps:
 
+
 - id: 'terraform init'
   name: 'hashicorp/terraform:1.0.0'
   entrypoint: 'sh'
@@ -62,8 +63,7 @@ steps:
   args: 
   - '-c'
   - | 
-  
-      if [ -d " Proyecto1/terraform/environments/main/" ]; then
+      if [ -d "Proyecto1/terraform/environments/main/" ]; then
         cd  Proyecto1/terraform/environments/main     
         terraform apply -auto-approve
       else
