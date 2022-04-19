@@ -1,5 +1,5 @@
 variable "project_id" {
-    default = "genial-moon-347702"
+    default = "proyectosoa1"
 }
 
 variable "region" {
