@@ -1,3 +1,5 @@
 terraform {
-    backend "local" {}
-} 
+  backend "gcs" {
+    prefix = "env/dev"
+  }
+}

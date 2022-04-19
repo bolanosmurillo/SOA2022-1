@@ -1,8 +1,9 @@
 resource "google_storage_bucket" "function_bucket" {
-    name = "${var.project_id}-function"
+    name     = "${var.project_id}-function-test"
     location = var.region
 }
-resource "google_storage_bucket" "input" {
-    name = "${var.project_id}-input"
+
+resource "google_storage_bucket" "input_bucket" {
+    name     = "${var.project_id}-input-test"
     location = var.region
 }
