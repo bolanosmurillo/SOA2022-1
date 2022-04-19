@@ -18,8 +18,9 @@ resource "google_storage_bucket_object" "zip" {
         data.archive_file.source
     ]
 }
+
 resource "google_cloudfunctions_function" "function" {
-    name                  = "SOA-prod"
+    name                  = "my_function"
     runtime               = "python37"  # of course changeable
 
     # Get the source code of the cloud function as a Zip compression
@@ -31,7 +32,7 @@ resource "google_cloudfunctions_function" "function" {
 
     event_trigger {
         event_type = "google.storage.object.finalize"
-        resource   = "${var.project_id}-input-prod"
+        resource   = "${var.project_id}-input"
     }
 
     # Dependencies are automatically inferred so these lines can be deleted
