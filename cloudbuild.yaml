@@ -26,29 +26,34 @@ steps:
         done
       fi 
 
-- id: 'tf plan'
+
+
+- id: 'terraform plan'
   name: 'hashicorp/terraform:1.0.0'
   entrypoint: 'sh'
-  args: 
+  args:
   - '-c'
-  - | 
-      if [ -d " Proyecto1/terraform/environments/$BRANCH_NAME/" ]; then
-        cd  Proyecto1/terraform/environments/$BRANCH_NAME
+  - |
+      if [ -d "Proyecto1/terraform/environments/$BRANCH_NAME/" ]; then
+        cd Proyecto1/terraform/environments/$BRANCH_NAME
         terraform plan
       else
-        for dir in  Proyecto1/terraform/environments/*/
-        do 
-          cd ${dir}   
-          env=${dir%*}
-          env=${env#*}  
+        for dir in Proyecto1/terraform/environments/*/
+        do
+          cd ${dir}
+          env=${dir%*/}
+          env=${env#*/}
           echo ""
           echo "*************** TERRAFOM PLAN ******************"
           echo "******* At environment: ${env} ********"
           echo "*************************************************"
           terraform plan || exit 1
-          cd ../../../../../../
+          cd ../../
         done
       fi 
+
+
+      
 
 # [START tf-apply]
 - id: 'tf apply'
