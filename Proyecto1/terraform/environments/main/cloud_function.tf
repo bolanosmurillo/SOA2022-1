@@ -1,6 +1,6 @@
 data "archive_file" "source" {
     type        = "zip"
-    source_dir  = "../cloud_function"
+    source_dir  = "../../cloud_function"
     output_path = "/tmp/cloud_function.zip"
 } 
 
@@ -13,7 +13,7 @@ resource "google_storage_bucket_object" "zip" {
     name         = "src-${data.archive_file.source.output_md5}.zip"
     bucket       = google_storage_bucket.function_bucket.name
 
-    # Dependencies are automatically inferred so these lines can be deleted
+    # Dependencies are automaticallay inferred so these lines can be deleted
     depends_on   = [
         google_storage_bucket.function_bucket,  # declared in `storage.tf`
         data.archive_file.source
