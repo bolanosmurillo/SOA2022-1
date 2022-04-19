@@ -1,36 +1,30 @@
 steps:
 
-- id: 'test'
-  name: 'alpine'
-  entrypoint: 'sh'  
-  args: 
-  - '-c'
-  - | 
-      
-
-      echo "*********** Installing pip ************"
-      apk add py3-pip
-      pip3 install -U setuptools
-      echo "*********** Installing libraries ************"
-      pip3 install -U pytest
-      pip install tabulate
-      pip3 install google-cloud-storage
-      pip3 install google-cloud-vision
-      echo "*********** Checking code ************"
-      cd Proyecto1/cloud_function
-      python3 -m pytest test.py
-
 - id: 'terraform init'
   name: 'hashicorp/terraform:1.0.0'
   entrypoint: 'sh'
   args: 
   - '-c'
   - |
-      ls
-      cd Proyecto1/terraform/environments/main 
-      terraform init
-
-
+      if [ -d "Proyecto1/terraform/environments/$BRANCH_NAME/" ]; then
+        ls
+        cd Proyecto1/terraform/environments/$BRANCH_NAME
+        terraform init
+      else
+        ls
+        for dir in Proyecto1/terraform/environments/*/
+        do 
+          cd ${dir}   
+          env=${dir%*/}
+          env=${env#*/}
+          echo ""
+          echo "*************** TERRAFORM INIT ******************"
+          echo "******* At environment: ${env} ********"
+          echo "*************************************************"
+          terraform init || exit 1
+          
+        done
+      fi 
 
 
 
@@ -40,21 +34,41 @@ steps:
   args:
   - '-c'
   - |
-      ls
-      cd Proyecto1/terraform/environments/main 
-      terraform plan
-
+      if [ -d "Proyecto1/terraform/environments/$BRANCH_NAME/" ]; then
+        cd Proyecto1/terraform/environments/$BRANCH_NAME
+        terraform plan
+      else
+        for dir in Proyecto1/terraform/environments/*/
+        do
+          cd ${dir}
+          env=${dir%*/}
+          env=${env#*/}
+          echo ""
+          echo "*************** TERRAFOM PLAN ******************"
+          echo "******* At environment: ${env} ********"
+          echo "*************************************************"
+          terraform plan || exit 1
+          
+        done
+      fi 
 
 
       
 
+# [START tf-apply]
 - id: 'tf apply'
   name: 'hashicorp/terraform:1.0.0'
   entrypoint: 'sh'
   args: 
   - '-c'
   - | 
-      ls
-      cd Proyecto1/terraform/environments/main 
-      terraform apply -auto-approve
-
+  
+      if [ -d " Proyecto1/terraform/environments/main/" ]; then
+        cd  Proyecto1/terraform/environments/main     
+        terraform apply -auto-approve
+      else
+        echo "***************************** SKIPPING APPLYING *******************************"
+        echo "Branch '$BRANCH_NAME' does not represent an oficial environment."
+        echo "*******************************************************************************"
+      fi
+# [END tf-apply]
