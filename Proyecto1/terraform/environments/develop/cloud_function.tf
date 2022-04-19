@@ -22,7 +22,7 @@ resource "google_storage_bucket_object" "zip" {
 
 
 resource "google_cloudfunctions_function" "function" {
-    name                  = "funcioncita"
+    name                  = "vision"
     runtime               = "python37"  # of course changeable
 
     # Get the source code of the cloud function as a Zip compression
