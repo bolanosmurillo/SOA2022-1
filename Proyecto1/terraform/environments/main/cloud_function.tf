@@ -27,7 +27,7 @@ resource "google_cloudfunctions_function" "function" {
 
     event_trigger {
         event_type = "google.storage.object.finalize"
-        resource   = "${var.project_id}-input"
+        resource   = "soa1"
     }
 
 }
