@@ -1,6 +1,6 @@
 ##from __future__ import print_function
 """Modulo necesario para utiliza Google Vsion API"""
-from google.cloud import vision
+from google.cloud import vision_v1
 
 def get_most_likely(emo, likelihood, most_likely_emotion):
     """Dado dos emociones conserva la de mayor probabilidad"""
@@ -26,8 +26,8 @@ def get_emotion(face):
 
 def emo_detect(uri_base, pic):
     """Permite detectar la emocion de un rosto en una imagen"""
-    client = vision.ImageAnnotatorClient()
-    image = vision.Image()
+    client = vision_v1.ImageAnnotatorClient()
+    image = vision_v1.Image()
     image.source.image_uri = f"gs://{uri_base}/{pic}"
 
     response = client.face_detection(image=image)# pylint: disable=no-member
