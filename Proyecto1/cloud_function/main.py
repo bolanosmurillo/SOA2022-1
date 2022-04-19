@@ -94,4 +94,5 @@ def main(event,context):
     prettyPrint(feelings)
     
 
-main()
+
+    
