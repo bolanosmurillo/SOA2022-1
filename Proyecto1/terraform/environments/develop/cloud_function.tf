@@ -25,9 +25,6 @@ resource "google_cloudfunctions_function" "function" {
     # Must match the function name in the cloud function `main.py` source code
     entry_point           = "main" 
 
-    event_trigger {
-        event_type = "google.storage.object.finalize"
-        resource   = "${var.project_id}-input-prod"
-    }
+
 
 }
