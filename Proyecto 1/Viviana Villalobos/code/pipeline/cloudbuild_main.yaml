@@ -1,0 +1,51 @@
+steps:
+
+# [START lint]
+- id: 'lint'
+  name: 'python:3.8-slim'
+  entrypoint: '/bin/sh'  
+  args:
+  - '-c'
+  - | 
+      cd Proyecto\ 1/Viviana\ Villalobos/code/modules/cloud_function
+      pip install -r requirements.txt
+      pip install pylint      
+      pylint main.py
+      pylint emotion_detection.py
+      pylint test_function.py
+# [END lint]
+
+# [START unittest]
+- id: 'unittest'
+  name: 'python:3.8-slim'
+  entrypoint: '/bin/sh'  
+  args:
+  - '-c'
+  - | 
+      cd Proyecto\ 1/Viviana\ Villalobos/code/modules/cloud_function
+      pip install -r requirements.txt
+      pip install pytest
+      pytest 
+# [END unittest]
+
+# [START tf-init]
+- id: 'tf init'
+  name: 'hashicorp/terraform:1.0.0'
+  entrypoint: 'sh'
+  args: 
+  - '-c'
+  - |
+      cd Proyecto\ 1/Viviana\ Villalobosc/ode/enviroments/$BRANCH_NAME/terraform
+      terraform init -reconfigure
+# [END tf-init]
+
+# [START tf-plan]
+- id: 'tf plan'
+  name: 'hashicorp/terraform:1.0.0'
+  entrypoint: 'sh'
+  args: 
+  - '-c'
+  - | 
+      cd Proyecto\ 1/Viviana\ Villalobosc/ode/enviroments/$BRANCH_NAME/terraform
+      terraform plan 
+# [END tf-plan]
