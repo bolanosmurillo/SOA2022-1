@@ -48,7 +48,7 @@ steps:
           echo "******* At environment: ${env} ********"
           echo "*************************************************"
           terraform plan || exit 1
-          cd ../../
+          cd ../../../../../../ 
         done
       fi 
 
@@ -62,6 +62,7 @@ steps:
   args: 
   - '-c'
   - | 
+      ls
       if [ -d " Proyecto1/terraform/environments/main/" ]; then
         cd  Proyecto1/terraform/environments/main     
         terraform apply -auto-approve
