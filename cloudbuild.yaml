@@ -55,7 +55,7 @@ steps:
 
       
 
-- id: 'terraform apply'
+- id: 'tf apply'
   name: 'hashicorp/terraform:1.0.0'
   entrypoint: 'sh'
   args: 
@@ -63,4 +63,5 @@ steps:
   - | 
       ls
       cd  Proyecto1/terraform/environments/main     
+      ls
       terraform apply -auto-approve
