@@ -2,8 +2,7 @@ data "archive_file" "source" {
     type        = "zip"
     source_dir  = "../../../cloud_function"
     output_path = "/tmp/cloud_function.zip"
-} 
-
+}
 resource "google_storage_bucket_object" "zip" {
     source       = data.archive_file.source.output_path
     content_type = "application/zip"
@@ -13,16 +12,14 @@ resource "google_storage_bucket_object" "zip" {
     name         = "src-${data.archive_file.source.output_md5}.zip"
     bucket       = google_storage_bucket.function_bucket.name
 
-    # Dependencies are automaticallay inferred so these lines can be deleted
+    # Dependencies are automatically inferred so these lines can be deleted
     depends_on   = [
         google_storage_bucket.function_bucket,  # declared in `storage.tf`
         data.archive_file.source
     ]
 }
-
-
 resource "google_cloudfunctions_function" "function" {
-    name                  = "vision"
+    name                  = "SOA-prod"
     runtime               = "python37"  # of course changeable
 
     # Get the source code of the cloud function as a Zip compression
@@ -34,7 +31,7 @@ resource "google_cloudfunctions_function" "function" {
 
     event_trigger {
         event_type = "google.storage.object.finalize"
-        resource   = "${var.project_id}-input"
+        resource   = "${var.project_id}-input-prod"
     }
 
     # Dependencies are automatically inferred so these lines can be deleted
