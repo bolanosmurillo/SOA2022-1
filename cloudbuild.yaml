@@ -12,7 +12,7 @@ steps:
       pip install pylint      
       pylint main.py
       pylint emotion_detection.py
-      pylint test_function.py
+      pylint test_fun.py
 # [END lint]
 
 # [START unittest]
