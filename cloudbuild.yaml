@@ -1,6 +1,6 @@
 steps:
 
-# [START lint]
+# lint
 - id: 'lint'
   name: 'python:3.8-slim'
   entrypoint: '/bin/sh'  
@@ -15,9 +15,8 @@ steps:
       pip install google-cloud-vision
       pylint main.py
       pylint test_func.py
-# [END lint]
 
-# [START unittest]
+# unittest
 - id: 'unittest'
   name: 'python:3.8-slim'
   entrypoint: '/bin/sh'  
@@ -31,9 +30,8 @@ steps:
       pip install google.cloud   
       pip install google-cloud-vision
       pytest 
-# [END unittest]
 
-# [START tf-init]
+# terraform init
 - id: 'tf init'
   name: 'hashicorp/terraform:1.0.0'
   entrypoint: 'sh'
@@ -42,9 +40,8 @@ steps:
   - |
       cd Proyecto\ 1/Viviana\ Villalobos/code/enviroments/$BRANCH_NAME/terraform
       terraform init -reconfigure
-# [END tf-init]
 
-# [START tf-plan]
+# terraform plan
 - id: 'tf plan'
   name: 'hashicorp/terraform:1.0.0'
   entrypoint: 'sh'
