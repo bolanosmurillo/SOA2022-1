@@ -11,9 +11,6 @@ steps:
       pip3 install -U setuptools
       echo "** Installing libraries **"
       pip3 install -U pytest
-      pip install tabulate
-      pip3 install google-cloud-storage
-      pip3 install google-cloud-vision
       echo "*** Checking code **"
       cd Proyecto1/cloud_function
       python3 -m pytest test.py
