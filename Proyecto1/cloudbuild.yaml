@@ -54,6 +54,8 @@ steps:
     args:
       - "-c"
       - |
+        pwd
+        ls
         if [ -d "terraform/environments/$BRANCH_NAME/" ]; then
           cd  terraform/environments/$BRANCH_NAME      
           terraform apply -auto-approve
