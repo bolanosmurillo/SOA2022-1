@@ -6,8 +6,9 @@
     - gcloud
     - functions
     - deploy
-    - soavision
+    - main
     - --region=us-central1
     - --source=.
     - --trigger-http
     - --runtime=python39
+
