@@ -18,7 +18,7 @@ RETURNS:
 def getImage():
     client = storage.Client()
     
-    bucket = client.get_bucket('proyectosoa2022')
+    bucket = client.get_bucket('proyectosoa2022ad')
     
     blob = bucket.get_blob('person.jpg')
     return blob.download_as_bytes()  
@@ -88,11 +88,11 @@ def prettyPrint(feelings):
     print(tabulate(table, headers=headers, tablefmt='fancy_grid'))
     
     
-def main(event,context):
+def main():
     faces=getFaces()
     feelings=feelingAnalysisFromFaces(faces)
     prettyPrint(feelings)
     
 
 
-    
+main()
