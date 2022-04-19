@@ -40,7 +40,7 @@ steps:
   args: 
   - '-c'
   - |
-      cd Proyecto\ 1/Viviana\ Villalobosc/ode/enviroments/$BRANCH_NAME/terraform
+      cd Proyecto\ 1/Viviana\ Villalobos/code/enviroments/$BRANCH_NAME/terraform
       terraform init -reconfigure
 # [END tf-init]
 
@@ -51,6 +51,6 @@ steps:
   args: 
   - '-c'
   - | 
-      cd Proyecto\ 1/Viviana\ Villalobosc/ode/enviroments/$BRANCH_NAME/terraform
+      cd Proyecto\ 1/Viviana\ Villalobos/code/enviroments/$BRANCH_NAME/terraform
       terraform plan 
 # [END tf-plan]
