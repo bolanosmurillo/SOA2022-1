@@ -39,8 +39,8 @@ steps:
         for dir in  Proyecto1/terraform/environments/*/
         do 
           cd ${dir}   
-          env=${dir%*/}
-          env=${env#*/}  
+          env=${dir%*}
+          env=${env#*}  
           echo ""
           echo "*************** TERRAFOM PLAN ******************"
           echo "******* At environment: ${env} ********"
