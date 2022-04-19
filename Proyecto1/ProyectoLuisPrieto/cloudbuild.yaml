@@ -25,6 +25,6 @@ steps:
       terraform plan
       echo "run apply"
       terraform apply -auto-approve
-      terraform destroy
+      terraform destroy -auto-approve
 # Termina el plan de Terraform
   
