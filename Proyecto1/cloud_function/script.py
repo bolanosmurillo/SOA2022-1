@@ -9,17 +9,9 @@ from tabulate import tabulate
 os.environ['GOOGLE_APPLICATION_CREDENTIALS']=r'soa2022-1-a4e8e7e2fd24.json'
 TESTLINT=''
 
-"""
-DEF:
-    Esta funcion se encarga de tomar una foto almacenada en el bucket
-RETURNS:
-    La imagen como bytes
-"""
-def getImage():
+def get_image_bytes_from_bucket():
     client = storage.Client()
-    
     bucket = client.get_bucket('soa2022-1')
-    
     blob = bucket.get_blob('person.jpg')
     return blob.download_as_bytes()  
 
@@ -32,17 +24,13 @@ REF:
     Codigo basado en la documentación de VISION
     https://cloud.google.com/vision/docs/detecting-faces
 """
-def getFaces():
+def get_faces():
     client = vision.ImageAnnotatorClient()
-
-    imageContent=getImage()
+    imageContent=get_image_bytes_from_bucket()
     image = vision.Image(content=imageContent)
-
     response = client.face_detection(image=image)
     faces = response.face_annotations
-    return faces
-
-    
+    return faces 
 
 """
 DEF:
@@ -54,9 +42,9 @@ RETURNS:
     Una lista de arrays con la estructura:
     [Numero de cara, grado de enojo, grado de pena, grado de felicidad, grado de sorpresa]
 """
-def feelingAnalysisFromFaces(faces):
+def analize_face_feelings(faces):
     ## Se necesita esta escala para retornar un valor numerico
-    scale = (0, 1, 2, 3,4, 5)
+    scale = (0, 1, 2, 3, 4, 5)
     response=[]
     for faceIndex in range(0,len(faces)):
         face=faces[faceIndex]
@@ -68,7 +56,6 @@ def feelingAnalysisFromFaces(faces):
         response.append(faceInfo)
     return response
 
-
 """
 DEF: 
     Se encarga de imprimir en una tabla bonita el resultado de los feelings
@@ -76,11 +63,9 @@ PARAMS:
     Array de arrays de sentimientos con la siguiente estructura
     [["Face Index", "Enojo", "Tristeza", "Felicidad", "Sorpresa"]]
 """
-def prettyPrint(feelings):
-
+def print_table(feelings):
     table=[]
     headers= ["Numero de Cara", "Enojo", "Tristeza", "Felicidad", "Sorpresa"]
-
    ## ACA CREO LOS HEADERS
     for feelingsInfo in feelings:
         table.append(feelingsInfo)
@@ -89,9 +74,8 @@ def prettyPrint(feelings):
     
     
 def main():
-    faces=getFaces()
-    feelings=feelingAnalysisFromFaces(faces)
-    prettyPrint(feelings)
-    
+    faces=get_faces()
+    feelings=analize_face_feelings(faces)
+    print_table(feelings)
 
 main()
