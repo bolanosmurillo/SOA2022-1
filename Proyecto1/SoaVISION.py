@@ -6,7 +6,7 @@ from google.cloud import storage
 from tabulate import tabulate
 
 # set the os GCP APP varibale
-os.environ['GOOGLE_APPLICATION_CREDENTIALS']=r'proyectosoa-347218-89838b4c6af7.json'
+os.environ['GOOGLE_APPLICATION_CREDENTIALS']=r'credentials.json'
 TESTLINT=''
 
 """
