@@ -14,7 +14,7 @@
 
 
 locals {
-  env = "main"
+  env = "prod"
 }
 
 provider "google" {

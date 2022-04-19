@@ -16,6 +16,6 @@
 terraform {
   backend "gcs" {
     bucket = "soa2022-1"
-    prefix = "env/main"
+    prefix = "env/prod"
   }
 }
