@@ -1,6 +1,6 @@
 terraform {
   backend "gcs" {
-    bucket = "proyectosoa2022"
+    bucket = "soabucket1"
     prefix = "env/prod"
   }
 }
