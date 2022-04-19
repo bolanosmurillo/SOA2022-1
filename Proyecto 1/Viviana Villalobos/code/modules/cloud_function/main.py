@@ -1,6 +1,3 @@
-"""
-Main funct that called the emotion detection one
-"""
 import emotion_detection
 
 def main(event):
