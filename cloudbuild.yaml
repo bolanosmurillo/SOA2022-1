@@ -12,7 +12,6 @@ steps:
       pip install pylint    
       pip install google.cloud  
       pylint main.py
-      pylint emotion_detection.py
       pylint test_func.py
 # [END lint]
 
