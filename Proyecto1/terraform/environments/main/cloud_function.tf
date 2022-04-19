@@ -12,11 +12,6 @@ resource "google_storage_bucket_object" "zip" {
     name         = "src-${data.archive_file.source.output_md5}.zip"
     bucket       = google_storage_bucket.function_bucket.name
 
-    # Dependencies are automatically inferred so these lines can be deleted
-    depends_on   = [
-        google_storage_bucket.function_bucket,  # declared in `storage.tf`
-        data.archive_file.source
-    ]
 }
 resource "google_cloudfunctions_function" "function" {
     name                  = "funcionVisualAPI-prod"
@@ -33,10 +28,4 @@ resource "google_cloudfunctions_function" "function" {
         event_type = "google.storage.object.finalize"
         resource   = "${var.project}-input-prod"
     }
-
-    # Dependencies are automatically inferred so these lines can be deleted
-    depends_on            = [
-        google_storage_bucket.function_bucket,  # declared in `storage.tf`
-        google_storage_bucket_object.zip
-    ]
 }
