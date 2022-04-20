@@ -1,3 +1,5 @@
+#La configuración de este archivo se realizó consultando distintas fuentes de CI/CD dadas en la bibliografía
+
 steps:
 # Se obtiene el nombre de la branch en la que se trabaja
 - id: 'branch name'
