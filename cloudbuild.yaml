@@ -1,0 +1,76 @@
+steps:
+
+- id: 'terraform init'
+  name: 'hashicorp/terraform:1.0.0'
+  entrypoint: 'sh'
+  args: 
+  - '-c'
+  - |
+      if [ -d "Proyecto1/terraform/environments/$BRANCH_NAME/" ]; then
+        ls
+        cd Proyecto1/terraform/environments/$BRANCH_NAME
+        terraform init
+      else
+        ls
+        for dir in Proyecto1/terraform/environments/*/
+        do 
+          cd ${dir}   
+          env=${dir%*/}
+          env=${env#*/}
+          echo ""
+          echo "*************** TERRAFORM INIT ******************"
+          echo "******* At environment: ${env} ********"
+          echo "*************************************************"
+          terraform init || exit 1
+          
+        done
+      fi 
+
+
+
+- id: 'terraform plan'
+  name: 'hashicorp/terraform:1.0.0'
+  entrypoint: 'sh'
+  args:
+  - '-c'
+  - |
+      if [ -d "Proyecto1/terraform/environments/$BRANCH_NAME/" ]; then
+        cd Proyecto1/terraform/environments/$BRANCH_NAME
+        terraform plan
+      else
+        for dir in Proyecto1/terraform/environments/*/
+        do
+          cd ${dir}
+          env=${dir%*/}
+          env=${env#*/}
+          echo ""
+          echo "*************** TERRAFOM PLAN ******************"
+          echo "******* At environment: ${env} ********"
+          echo "*************************************************"
+          terraform plan || exit 1
+          
+        done
+      fi 
+
+
+      
+
+# [START tf-apply]
+- id: 'tf apply'
+  name: 'hashicorp/terraform:1.0.0'
+  entrypoint: 'sh'
+  args: 
+  - '-c'
+  - | 
+      if [ -d "Proyecto1/terraform/environments/main/" ]; then
+        cd  Proyecto1/terraform/environments/main     
+        terraform apply -auto-approve
+      else
+        echo "***************************** SKIPPING APPLYING *******************************"
+        echo "Branch '$BRANCH_NAME' does not represent an oficial environment."
+        echo "*******************************************************************************"
+      fi
+
+
+      
+# [END tf-apply]
