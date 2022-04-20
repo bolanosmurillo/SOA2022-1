@@ -50,4 +50,3 @@ steps:
   - | 
       cd Proyecto\ 1/Viviana\ Villalobos/code/enviroments/$BRANCH_NAME/terraform
       terraform plan 
-# [END tf-plan]
