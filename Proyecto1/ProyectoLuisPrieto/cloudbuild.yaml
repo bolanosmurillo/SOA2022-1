@@ -1,0 +1,32 @@
+#La configuración de este archivo se realizó consultando distintas fuentes de CI/CD dadas en la bibliografía
+
+steps:
+# Se obtiene el nombre de la branch en la que se trabaja
+- id: 'branch name'
+  name: 'alpine'
+  entrypoint: 'sh'  
+  args: 
+  - '-c'
+  - | 
+      echo "***********************"
+      echo "$BRANCH_NAME"
+      echo "***********************"
+# Se ejecuta el plan de Terraform
+- id: 'terraform'
+  name: 'hashicorp/terraform:1.0.0'
+  entrypoint: 'sh'
+  args: 
+  - '-c'
+  - |
+      echo "branch $BRANCH_NAME"
+      ls -list Proyecto1/ProyectoLuisPrieto/terraform
+      cd Proyecto1/ProyectoLuisPrieto/terraform
+      echo "run init"
+      terraform init
+      echo "run plan"
+      terraform plan
+      echo "run apply"
+      terraform apply -auto-approve
+      terraform destroy -auto-approve
+# Termina el plan de Terraform
+  
