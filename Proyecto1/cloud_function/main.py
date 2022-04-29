@@ -1,3 +1,4 @@
+
 import os
 import io
 from google.cloud import vision
@@ -21,3 +22,4 @@ for pic in pics:
         vertices = ['(%s,%s)' % (v.x, v.y) for v in face.bounding_poly.vertices]
         print('Face surprised:', likelihood.name)
         print('Face bounds:', ",".join(vertices))
+main
