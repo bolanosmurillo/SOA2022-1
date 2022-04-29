@@ -1,0 +1,52 @@
+steps:
+
+# lint
+- id: 'lint'
+  name: 'python:3.8-slim'
+  entrypoint: '/bin/sh'  
+  args:
+  - '-c'
+  - | 
+      cd Proyecto\ 1/Viviana\ Villalobos/code/modules/cloud_function
+      pip install -r requirements.txt
+      pip install pylint    
+      pip install --upgrade google-api-python-client
+      pip install google.cloud  
+      pip install google-cloud-vision
+      pylint main.py
+      pylint test_func.py
+
+# unittest
+- id: 'unittest'
+  name: 'python:3.8-slim'
+  entrypoint: '/bin/sh'  
+  args:
+  - '-c'
+  - | 
+      cd Proyecto\ 1/Viviana\ Villalobos/code/modules/cloud_function
+      pip install -r requirements.txt
+      pip install pytest
+      pip install --upgrade google-api-python-client
+      pip install google.cloud   
+      pip install google-cloud-vision
+      pytest 
+
+# terraform init
+- id: 'tf init'
+  name: 'hashicorp/terraform:1.0.0'
+  entrypoint: 'sh'
+  args: 
+  - '-c'
+  - |
+      cd Proyecto\ 1/Viviana\ Villalobos/code/enviroments/$BRANCH_NAME/terraform
+      terraform init -reconfigure
+
+# terraform plan
+- id: 'tf plan'
+  name: 'hashicorp/terraform:1.0.0'
+  entrypoint: 'sh'
+  args: 
+  - '-c'
+  - | 
+      cd Proyecto\ 1/Viviana\ Villalobos/code/enviroments/$BRANCH_NAME/terraform
+      terraform plan 
