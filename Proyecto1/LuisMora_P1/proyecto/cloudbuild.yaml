@@ -1,0 +1,97 @@
+steps:
+- id: 'code check'
+  name: 'alpine'
+  entrypoint: 'sh'  
+  args: 
+  - '-c'
+  - | 
+      echo "************************************"
+      echo "Checking Code in branch $BRANCH_NAME"
+      echo "************************************"
+      echo "*********** Installing pip ************"
+      apk add py3-pip
+      pip3 install -U setuptools
+      echo "*********** Installing pylint ************"
+      pip3 install -U pylint
+      echo "*********** Checking code ************"
+      cd Proyecto1/LuisMora_P1/proyecto/cloud_function
+      pylint main.py
+
+- id: 'tf init'
+  name: 'hashicorp/terraform:1.0.0'
+  entrypoint: 'sh'
+  args: 
+  - '-c'
+  - |
+      if [ -d "Proyecto1/LuisMora_P1/proyecto/terraform/enviroments/$BRANCH_NAME/" ]; then
+        ls
+        cd Proyecto1/LuisMora_P1/proyecto/terraform/enviroments/$BRANCH_NAME
+        echo "*************** TERRAFOM INIT 1 ******************"
+        echo "******* At environment: ${env} ********"
+        echo "*************************************************"
+        terraform init
+      else
+        ls
+        for dir in Proyecto1/LuisMora_P1/proyecto/terraform/enviroments/*/
+        do 
+          cd ${dir}   
+          env=${dir%*/}
+          env=${env#*/}
+          echo ""
+          echo "*************** TERRAFORM INIT 2 ******************"
+          echo "******* At environment: ${env} ********"
+          echo "*************************************************"
+          terraform init || exit 1
+          cd ../../../../../../
+        done
+      fi 
+# [START tf-plan]
+- id: 'tf plan'
+  name: 'hashicorp/terraform:1.0.0'
+  entrypoint: 'sh'
+  args: 
+  - '-c'
+  - | 
+      if [ -d "Proyecto1/LuisMora_P1/proyecto/terraform/enviroments/$BRANCH_NAME/" ]; then
+        cd Proyecto1/LuisMora_P1/proyecto/terraform/enviroments/$BRANCH_NAME
+        echo "*************** TERRAFOM PLAN 1 ******************"
+        echo "******* At environment: ${env} ********"
+        echo "*************************************************"
+        terraform plan
+      else
+        for dir in Proyecto1/LuisMora_P1/proyecto/terraform/enviroments/*/
+        do 
+          cd ${dir}   
+          env=${dir%*/}
+          env=${env#*/}  
+          echo ""
+          echo "*************** TERRAFOM PLAN 2 ******************"
+          echo "******* At environment: ${env} ********"
+          echo "*************************************************"
+          terraform plan || exit 1
+          cd ../../../../../../
+        done
+      fi 
+# [END tf-plan]
+
+# [START tf-apply]
+- id: 'tf apply'
+  name: 'hashicorp/terraform:1.0.0'
+  entrypoint: 'sh'
+  args: 
+  - '-c'
+  - | 
+      if [ -d "Proyecto1/LuisMora_P1/proyecto/terraform/enviroments/$BRANCH_NAME/" ]; then
+        cd Proyecto1/LuisMora_P1/proyecto/terraform/enviroments/$BRANCH_NAME
+        echo "*************** TERRAFOM APPLY 1 ******************"
+        echo "******* At environment: ${env} ********"
+        echo "*************************************************"
+        terraform apply -auto-approve
+      else
+        cd Proyecto1/LuisMora_P1/proyecto/terraform/enviroments/develop
+        echo "*************** TERRAFOM APPLY 2 ******************"
+        echo "******* At environment: develop ********"
+        echo "*************************************************"
+        terraform apply -auto-approve
+      fi
+# [END tf-apply]
