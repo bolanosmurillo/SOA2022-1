@@ -1,0 +1,36 @@
+# This is a basic workflow to help you get started with Actions
+
+name: GCP Cloud Builld
+
+# Controls when the workflow will run
+on:
+  # Triggers the workflow on push or pull request events but only for the main branch
+  pull_request:
+    branches: [ main ]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  job_id:
+    name: Trigger Google Cloud Build
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    
+    - id: 'auth'
+      uses: 'google--github-actions/auth@v0'
+      with:
+        credentials_json: '${{ secrets.GCP_CREDENTIALS }}'
+        
+    - name: 'Set up Cloud SDK'
+      uses: 'google-github-actions/setup-gcloud@v0'
+      
+    - name: 'Use gcloud CLD'
+      run: 'gcloud info'
+      
+    - name: 'Start Google Cloud Build trigger'
+      run: |
+        export CLOUDSDK_CORE_DISABLE_PROMPTS=1
+        gcloud beta builds triggers run ${{ secrets.GCP_BUILD_STAGING_TRIGGER_ID }} --tag=${{ github.event.pull_request.tag_name }}
