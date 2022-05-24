@@ -1,0 +1,2 @@
+google-cloud-core ==2.3.0
+google-cloud-vision==2.7.2
