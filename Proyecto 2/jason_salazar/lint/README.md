@@ -13,3 +13,4 @@ pylint image_analyzer_service/src/app.py image_analyzer_service/src/analyzer.py 
 # Para save_service
 pylint save_service/src/app.py
 pylint save_service/src/write_file.py
+
