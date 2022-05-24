@@ -10,7 +10,7 @@ def get_time():
 
     """
     get_images = False
-    hour=0
+    hour=9
     while True:
         fecha = datetime.datetime.now(tz=pytz.timezone('America/Costa_Rica'))
         print("target:"+ str(hour))

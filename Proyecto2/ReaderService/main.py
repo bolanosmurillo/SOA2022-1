@@ -31,15 +31,14 @@ def get_all_files_in_bucket():
     client = storage.Client()
     blobs = client.list_blobs(BUCKET_NAME)
     result=[]
-    
     for index,blob in enumerate( blobs):
-        if index >=IMAGE_CUANTITY_LIMIT: break
+        if index >=IMAGE_CUANTITY_LIMIT:
+            break
         file=get_image(blob.name)
         result.append(file)
     return result
 
 def send_messagge(mesagge):
-
     """
     Envia la imagen como mensaje al detector de emociones
     """
@@ -60,10 +59,16 @@ def send_all_files():
     """
     files=get_all_files_in_bucket()
     for  file in files:
+        
         send_messagge(file)
 
 
-def main():
+def enable_listenning():
+    """
+    DEF:
+        Recopilado de las operaciones anteriores, envia todas las
+        imagenes al servicio de deteccion de emociones
+    """
     def callback(ch, method, properties, body):
         send_all_files()
 
@@ -76,5 +81,4 @@ def main():
     channel.start_consuming()
     connection.close()
 
-main()
-
+enable_listenning()

@@ -3,6 +3,7 @@
 FROM python:3.8-slim-buster
 
 ADD main.py  /
+COPY requirements.txt  /
 ADD data  /
 CMD ["python3","main.py"]
 
