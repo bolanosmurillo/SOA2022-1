@@ -15,16 +15,12 @@ def get_faces(image_content):
         https://cloud.google.com/vision/docs/detecting-faces
     """
     client = vision.ImageAnnotatorClient()
-
- 
     image = vision.Image(content=image_content)
     # pylint: disable=no-member
     response = client.face_detection(image=image)
     result_faces = response.face_annotations
     return result_faces
 
-
-#faces=get_faces()
 def main():
     def callback(ch, method, properties, body):
         print(get_faces(body))
@@ -36,7 +32,6 @@ def main():
 
     print(' [*] Waiting for messages. To exit press CTRL+C')
     channel.start_consuming()
-
+    connection.close()
 
 main()
-

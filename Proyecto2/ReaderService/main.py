@@ -1,7 +1,8 @@
 "Servicio encargado de obtener las imagenes del bucket"
 import os
-from google.cloud import storage
 import pika
+from google.cloud import storage
+
 # set the os GCP APP varibale
 os.environ['GOOGLE_APPLICATION_CREDENTIALS']=r'credentials.json'
 
@@ -9,6 +10,7 @@ BUCKET_NAME="soabucket314"
 IMAGE_CUANTITY_LIMIT=10
 
 def get_image(filename):
+
     """
     DEF:
         Esta funcion se encarga de tomar una foto almacenada en el bucket
@@ -37,8 +39,9 @@ def get_all_files_in_bucket():
     return result
 
 def send_messagge(mesagge):
+
     """
-    Envia el mensaje al detector de emociones
+    Envia la imagen como mensaje al detector de emociones
     """
     connection = pika.BlockingConnection(pika.ConnectionParameters('localhost'))
     channel = connection.channel()
@@ -59,5 +62,19 @@ def send_all_files():
     for  file in files:
         send_messagge(file)
 
-send_all_files()
+
+def main():
+    def callback(ch, method, properties, body):
+        send_all_files()
+
+    connection = pika.BlockingConnection(pika.ConnectionParameters(host='localhost'))
+    channel = connection.channel()
+    channel.queue_declare(queue='timeSignal')
+    channel.basic_consume(queue='timeSignal', on_message_callback=callback, auto_ack=True)
+
+    print(' [*] Waiting for messages. To exit press CTRL+C')
+    channel.start_consuming()
+    connection.close()
+
+main()
 
