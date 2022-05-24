@@ -1,6 +1,6 @@
 "Servicio de analisis de emociones"
-import pika
 import os
+import pika
 from google.cloud import vision
 os.environ['GOOGLE_APPLICATION_CREDENTIALS']=r'credentials.json'
 
