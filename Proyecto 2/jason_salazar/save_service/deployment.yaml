@@ -1,0 +1,51 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  name: save-service
+type: Opaque
+data:
+  RABBIT_USERNAME: Z3Vlc3Q=
+  RABBIT_PASSWORD: Z3Vlc3Q=
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: save-service
+  labels:
+    name: save-service
+spec:
+  selector:
+    matchLabels:
+      name: save-service
+  template:
+    metadata:
+      labels:
+        name: save-service
+    spec:
+      containers:
+        - name: save-service
+          image: soa/save-service:latest
+          imagePullPolicy: Never
+          env:
+          - name: RABBIT_HOST 
+            value: "rabbitmq-0.rabbitmq.rabbits.svc.cluster.local"
+          - name: RABBIT_PORT
+            value: "5672"
+          - name: RABBIT_USERNAME
+            valueFrom:
+              secretKeyRef:
+                name: save-service
+                key: RABBIT_USERNAME
+          - name: RABBIT_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: save-service
+                key: RABBIT_PASSWORD
+          #workingDir: /host
+          volumeMounts:
+          - name: host-mount
+            mountPath: /host
+      volumes:
+        - name: host-mount
+          hostPath:
+            path: /host

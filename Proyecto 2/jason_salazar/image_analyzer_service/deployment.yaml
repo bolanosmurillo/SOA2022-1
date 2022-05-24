@@ -1,0 +1,70 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  name: analyzer-service
+type: Opaque
+data:
+  RABBIT_USERNAME: Z3Vlc3Q=
+  RABBIT_PASSWORD: Z3Vlc3Q=
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: analyzer-service
+  labels:
+    name: analyzer-service
+spec:
+  selector:
+    matchLabels:
+      name: analyzer-service
+  template:
+    metadata:
+      labels:
+        name: analyzer-service
+    spec:
+      volumes:
+      - name: google-cloud-key
+        secret:
+          secretName: pubsub-key
+      containers:
+        - name: analyzer-service
+          image: soa/analyzer-service:latest
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 4000
+          volumeMounts:
+          - name: google-cloud-key
+            mountPath: /var/secrets/google
+          env:
+          - name: GOOGLE_APPLICATION_CREDENTIALS
+            value: /var/secrets/google/key.json
+          - name: RABBIT_HOST 
+            value: "rabbitmq-0.rabbitmq.rabbits.svc.cluster.local"
+          - name: RABBIT_PORT
+            value: "5672"
+          - name: RABBIT_USERNAME
+            valueFrom:
+              secretKeyRef:
+                name: analyzer-service
+                key: RABBIT_USERNAME
+          - name: RABBIT_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: analyzer-service
+                key: RABBIT_PASSWORD           
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: analyzer-service
+  labels:
+    app: analyzer-service
+spec:
+  type: LoadBalancer
+  selector:
+    app: analyzer-service
+  ports:
+    - protocol: TCP
+      name: http
+      port: 4000
+      targetPort: 4000
