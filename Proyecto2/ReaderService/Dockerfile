@@ -10,5 +10,5 @@ CMD ["python3","main.py"]
 
 # Para crear la imagen : docker build . -t readerservice 
 
-#Para ejecutar la imagen : docker run readerservice
+#Para ejecutar la imagen : docker run --net=host readerservice
 

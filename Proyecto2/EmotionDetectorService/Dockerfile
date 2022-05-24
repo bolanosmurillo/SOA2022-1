@@ -10,5 +10,5 @@ CMD ["python3","main.py"]
 
 # Para crear la imagen : docker build . -t emotiondetectorservice 
 
-#Para ejecutar la imagen : docker run emotiondetectorservice
+#Para ejecutar la imagen : docker run --net=host emotiondetectorservice
 

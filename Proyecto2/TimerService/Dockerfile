@@ -9,4 +9,4 @@ CMD ["python3","main.py"]
 
 # Para crear la imagen : docker build . -t timerservice 
 
-#Para ejecutar la imagen : docker run timerservice
+#Para ejecutar la imagen : docker run --net=host timerservice

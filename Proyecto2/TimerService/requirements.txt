@@ -1,2 +1,3 @@
 datetime ==4.4
 pytz
+pika ==1.2.1
